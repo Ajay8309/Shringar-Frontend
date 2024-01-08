@@ -7,6 +7,8 @@ const API = axios.create({
     withCredentials: true,
 });
 
+// console.log(API);
+
 API.interceptors.request.use(
     function(req) {
         const token = JSON.parse(localStorage.getItem("token"));

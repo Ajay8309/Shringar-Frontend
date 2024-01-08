@@ -53,7 +53,7 @@ class AuthService {
     }
 
     getCurrentUser() {
-        return API.get("/users/profile");
+        return API.get("/user/profile");
     }
 }
 

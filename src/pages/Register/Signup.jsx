@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, HelpText, Input, Label } from '@windmill/react-ui';
 import API from '../../api/axios.config';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../context/UserContext';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -9,7 +9,7 @@ import { Link, Navigate, useLocation } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 const Signup = () => {
-    console.log('Is this Working');
+    // console.log('Is this Working');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const { state } = useLocation();
