@@ -10,6 +10,8 @@ const WishlistProvider = ({children}) => {
     const [wishlistData, setWishlistData] = useState();
     const {isLoggedIn} = useUser();
     const [isLoading, setIsLoading] = useState(false);
+    const [wishlistTotal, setWishlistTotal] = useState(0);
+    
 
     useEffect(() => {
         setIsLoading(true);
@@ -35,7 +37,12 @@ const WishlistProvider = ({children}) => {
             setWishlistData({items:[...items]});
             setIsLoading(false);
         }
-    }, isLoggedIn);
+    }, [isLoggedIn]);
+
+    useEffect(() => {
+        const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quantity), 0) || 0;
+        setWishlistTotal(quantity);
+    }, [wishlistData]);
 
 
     const addItem = async (product) => {
@@ -72,7 +79,8 @@ const WishlistProvider = ({children}) => {
             wishlistData, 
             setWishlistData,
             addItem,
-            deleteItem 
+            deleteItem,
+            wishlistTotal 
           }}
         >
 

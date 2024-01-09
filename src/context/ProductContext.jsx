@@ -10,7 +10,7 @@ const ProductProvider = ({children}) => {
 
     useEffect(() => {
         setIsLoading(true);
-        productService.getProduct(page).then((res) => {
+        productService.getProducts(page).then((res) => {
             setProducts(res.data);
             setIsLoading(false);
         })

@@ -1,0 +1,14 @@
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    width: calc(25% - 16px); /* Adjust the width based on your layout preferences */
+    box-sizing: border-box;
+  }
+  

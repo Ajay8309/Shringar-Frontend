@@ -3,50 +3,45 @@ import {createContext, useContext, useEffect, useState} from 'react';
 import cartService from "../services/cart.service";
 import {useUser} from "./UserContext";
 
-
 const CartContext = createContext();
 
-const CartProvider = ({children}) => {
-    const [cartData, setCartData] = useState();
+const CartProvider = ({ children }) => {
+    const [cartData, setCartData] = useState([]);
     const [cartSubTotal, setCartSubTotal] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
-    const {isLoggedIn} = useUser();
+    const { isLoggedIn } = useUser();
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             const saveLocalCart = async () => {
                 const cartObj = localCart
-                .getItems()
-                .map(({product_id, quantity}) => cartService.addToCart(product_id, quantity));
-            await Promise.all(cartObj);
-            localCart.clearCart();
-            cartService.getCart().then((res) => {
-                setCartData(res?.data);
-                setIsLoading(false);
-            });    
+                    .getItems()
+                    .map(({ product_id, quantity }) => cartService.addToCart(product_id, quantity));
+                await Promise.all(cartObj);
+                localCart.clearCart();
+                cartService.getCart().then((res) => {
+                    setCartData(res?.data);
+                    setIsLoading(false);
+                });
             };
             saveLocalCart();
-        }else {
+        } else {
             const items = localCart.getItems();
-            if(items == null) {
+            if (items == null) {
                 return;
             }
-            setCartData({items:{...items}});
+
+            setCartData(items);
             setIsLoading(false);
         }
     }, [isLoggedIn]);
 
     useEffect(() => {
-        const quantity = cartData?.items?.reduce((acc, cur) => {
-            return acc + Number(cur.quantity);
-        }, 0);
+        const quantity = cartData?.items?.reduce((acc, cur) => acc + Number(cur.quantity), 0) || 0;
+        const TotalAmt = cartData?.items?.reduce((acc, cur) => acc + Number(cur.subtotal), 0) || 0;
 
-        const TotalAmt = cartData?.items.reduce((acc, cur) => {
-            return acc + Number(cur.subtotal);
-        }, 0);
-        
         setCartSubTotal(TotalAmt);
         setCartTotal(quantity);
     }, [cartData]);
@@ -103,33 +98,30 @@ const CartProvider = ({children}) => {
 
     return (
         <CartContext.Provider
-          value={{
-            isLoading,
-            cartData,
-            setCartData,
-            addItem,
-            deleteItem,
-            increment,
-            decrement,
-            cartTotal,
-            cartSubTotal,
-          }}
+            value={{
+                isLoading,
+                cartData,
+                setCartData,
+                addItem,
+                deleteItem,
+                increment,
+                decrement,
+                cartTotal,
+                cartSubTotal,
+            }}
         >
-
             {children}
-
         </CartContext.Provider>
     );
-
 };
 
 const useCart = () => {
     const context = useContext(CartContext);
 
-    if(context = undefined) {
+    if (context === undefined) {
         throw new Error("useCart must be used within CartProvider");
     }
     return context;
 };
 
-export {CartProvider, useCart};
+export { CartProvider, useCart };

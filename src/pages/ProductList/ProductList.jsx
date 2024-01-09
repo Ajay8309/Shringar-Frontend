@@ -1,8 +1,10 @@
 import { Card, Pagination } from "@windmill/react-ui";
-import Product from "components/Product";
-import Spinner from "components/Spinner";
+import Product from "../../components/Product/Product";
+import Spinner from "../../components/Spinner/Spinner";
 import { useProduct } from "../../context/ProductContext";
-// import Layout from "layout/Layout";
+import Layout from "../../layout/layout";
+// import Nav from "../../components/Nav/Nav"
+import "../ProductList/ProductList.css"
 
 const ProductList = () => {
   const { products, setPage } = useProduct();
@@ -11,6 +13,9 @@ const ProductList = () => {
     setPage(page);
     window.scrollTo({ behavior: "smooth", top: 0 });
   };
+
+  console.log("Running working ");
+  console.log(products);
 
   if (!products) {
     return (
@@ -22,19 +27,18 @@ const ProductList = () => {
     );
   }
 
+  
   return (
     <Layout>
-      <div className="container py-20 mx-auto">
-        <Card className="flex flex-wrap h-full mx-2">
-          {products?.map((prod) => (
-            <div
-              className="w-full flex flex-col justify-between sm:w-1/2 md:w-1/3 lg:w-1/4 my-2 px-2 box-border"
-              key={prod.product_id}
-            >
-              <Product product={prod} />
-            </div>
-          ))}
-        </Card>
+  
+      <div className="">
+      <div className="product-list">
+        {products?.map((prod) => (
+          <div key={prod.product_id} className="product-card">
+            <Product product={prod} />
+          </div>
+        ))}
+      </div>
         <Pagination
           totalResults={20}
           resultsPerPage={12}
@@ -42,8 +46,8 @@ const ProductList = () => {
           label="Page navigation"
         />
       </div>
-    </Layout>
+      </Layout>
   );
 };
 
-export default ProductList;
+export default ProductList
