@@ -1,4 +1,4 @@
-// import useCart from "../context/CartContext"
+// import {useCart} from "../../context/CartContext"
 import {useWishlist} from "../../context/WishlistContext"
 import { Link } from "react-router-dom"
 // import {formatCurrency} from "../helpers/formatCurrency"

@@ -19,7 +19,7 @@ const WishlistProvider = ({children}) => {
             const saveLocalWishlist = async () => {
                 const wishlistObj = LocalWishlist
                 .getItems()
-                .map(({product_id}) => cartService.addToCart(product_id));
+                .map(({product_id}) => wishlistService.addToWishlist(product_id));
               await Promise.all(wishlistObj);
               LocalWishlist.clearWishlist();
               wishlistService.getWishlist().then((res) => {
@@ -40,9 +40,10 @@ const WishlistProvider = ({children}) => {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quantity), 0) || 0;
+        const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
         setWishlistTotal(quantity);
-    }, [wishlistData]);
+    }, [wishlistData, setWishlistData]);
+    
 
 
     const addItem = async (product) => {

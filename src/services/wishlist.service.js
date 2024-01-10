@@ -2,11 +2,11 @@ import API from "../api/axios.config";
 
 class WishlistService {
   getWishlist() {
-    return API.get("/wishlist");
+    return API.get("/wishlist",);
   }
 
   async addToWishlist(product_id) {
-    return await API.post("/wishlist/add", { product_id, wishlist_id });
+    return await API.post("/wishlist/add", { product_id });
   }
 
   async removeFromWishlist(product_id) {

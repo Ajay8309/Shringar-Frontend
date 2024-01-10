@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const Layout = ({ children, title, loading }) => {
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>{title || "Home"} | PERN Store </title>
         <meta
@@ -40,7 +40,7 @@ const Layout = ({ children, title, loading }) => {
           height: 100%;
         }
     `}</style>
-      </Helmet> */}
+      </Helmet>
       <div className="min-h-screen flex flex-col">
         <Nav />
         {loading ? (
