@@ -1,7 +1,7 @@
-import { useUser } from "context/UserContext";
+import { useUser } from "../context/UserContext";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-export const ProtectedRoute = ({ redirectPath = "/login", children }) => {
+ const ProtectedRoute = ({ redirectPath = "/login", children }) => {
   const { isLoggedIn } = useUser();
   const location = useLocation();
 
@@ -11,3 +11,5 @@ export const ProtectedRoute = ({ redirectPath = "/login", children }) => {
 
   return children ? children : <Outlet />;
 };
+
+export default ProtectedRoute;

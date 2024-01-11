@@ -48,12 +48,12 @@ const Nav = () => {
         {!isLoggedIn && (
           <>
           <li className='logLink'>
-            <Link to="/login" className='loginLink'>
+            <Link to="/login" className='loginLink underline'>
               <span>Login</span>
             </Link>
           </li>
           <li className='cartLink'>
-            <Link to="/cart">
+            <Link to="/cart" className='underline'>
               <button className='cartBtn'>
                 <ShoppingCart className='cartImg'/>
                 <div className="cartTotal">
@@ -68,7 +68,7 @@ const Nav = () => {
         {isLoggedIn && (
           <>
           <li className='wishlistLink'>
-               <Link to="/wishlist">
+               <Link to="/wishlist" className='underline'>
                   <button className='wishlistBtn'>
                     <span>Wishlist</span>
                     <Heart className='heartImg'/>
@@ -79,7 +79,7 @@ const Nav = () => {
                </Link>
           </li>
            <li className='cartLink'>
-           <Link to="/cart">
+           <Link to="/cart" className='underline'>
               <button className='cartBtn'>
                 <span>Cart</span>
                 <ShoppingCart className='cartImg'/>
@@ -105,17 +105,17 @@ const Nav = () => {
                   <p>@{userData?.username}</p>
                 </div>
                 <div className="profile">
-                  <Link to="/profile">
+                  <Link to="/profile" className='underline'>
                     profile
                   </Link>
                 </div>
                 <div className='orders'>
-                  <Link to="/orders">
+                  <Link to="/orders" className='underline'>
                     Orders
                   </Link>
                 </div>
                 <div className="logout">
-                  <Link to="/login" onClick={() => logout()}>
+                  <Link to="/login" onClick={() => logout()} className='underline'>
                     Logout
                   </Link>
                 </div>

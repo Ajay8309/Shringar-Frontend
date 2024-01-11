@@ -1,0 +1,171 @@
+/* Product.css */
+
+.group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none; /* Removed text-decoration */
+  transition: box-shadow 0.3s ease;
+}
+
+.group:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: transparent;
+  color: #3498db;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.wishlist.active {
+  color: #fff;
+  background-color: #3498db;
+}
+
+.productImg {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd; /* Added a subtle border at the bottom of the image */
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+  color: #333; /* Added text color */
+}
+
+.price {
+  font-size: 1.1em;
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Heart Icon styles */
+.heart-icon {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.heart-icon.active {
+  color: rgb(127, 201, 254);
+}
+
+.heart-icon.inActive {
+  color: white;
+}
+
+/* Product.css */
+
+.group {
+  /* ... existing styles ... */
+  text-decoration: none; /* Removed text-decoration */
+  transition: box-shadow 0.3s ease;
+}
+
+.group:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Add the following styles */
+.cardBody h2, .cardBody .price {
+  text-decoration: none;
+  color: #333; /* Set text color */
+}
+
+/* ... existing styles ... */
+/* Product.css */
+
+.group {
+  /* ... existing styles ... */
+  text-decoration: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.group:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cardBody h2,
+.cardBody .price {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+  text-decoration: none; /* Remove underlines */
+  color: #333; /* Set text color */
+}
+
+.price {
+  font-size: 1.1em;
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.underline{
+  text-decoration: none;
+}
+/* Product.css */
+
+.group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out; /* Add transition for smooth effect */
+}
+
+.group:hover {
+  transform: scale(1.05); 
+}
+
+.group a {
+  text-decoration: none; 
+}
+
+.productImg {
+  width: 100%;
+  height: auto;
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+
+.price {
+  font-size: 1.1em;
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Heart Icon styles */
+.heart-icon.active {
+  color: rgb(127, 201, 254);
+}
+
+.heart-icon.inActive {
+  color: white;
+}

@@ -11,7 +11,7 @@ const WishlistProvider = ({children}) => {
     const {isLoggedIn} = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const [wishlistTotal, setWishlistTotal] = useState(0);
-    
+    const {userData} = useUser();
 
     useEffect(() => {
         setIsLoading(true);
@@ -49,6 +49,7 @@ const WishlistProvider = ({children}) => {
     const addItem = async (product) => {
         if(isLoggedIn) {
             try {
+                // console.log(userData.user_id);
                 const {data} = await wishlistService.addToWishlist(product.product_id);
                 setWishlistData({items: [...data.data]});
             } catch (error) {
@@ -73,6 +74,17 @@ const WishlistProvider = ({children}) => {
         }
     }
 
+    
+
+    const isInWishlist = async ( product_id) => {
+        if (isLoggedIn) {
+          return await wishlistService.isInWishlist( product_id);
+        } else {
+          return LocalWishlist.getItems().some((item) => item.product_id === product_id);
+        }
+      };
+    
+
     return (
         <WishlistContext.Provider
           value={{
@@ -81,7 +93,8 @@ const WishlistProvider = ({children}) => {
             setWishlistData,
             addItem,
             deleteItem,
-            wishlistTotal 
+            wishlistTotal,
+            isInWishlist 
           }}
         >
 
