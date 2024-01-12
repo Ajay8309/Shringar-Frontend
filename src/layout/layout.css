@@ -1,62 +1,49 @@
-/* Reset some default browser styles */
-/* body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-  } */
-  
-  /* body {
-    font-family: 'Your Font Here', sans-serif;
-    font-size: 16px;
-    line-height: 1.5; */
-  
-  
-  /* Utility class to center an absolute-positioned element */
-  /* .center-absolute {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  } */
-  
-  /* Loading spinner styles */
-  .spinner {
-    border: 8px solid #3498db;
-    border-top: 8px solid #ffffff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Main content styles */
-  
-  
-  main {
-    flex-grow: 1;
-    text-align: center;
-    margin-top: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 960px;
-  }
-  
-  /* Footer styles */
-  footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: center;
-    padding: 8px 0;
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-    body {
-      font-size: 14px;
-    }
-  }
-  
+/* Reset some default styles */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0; /* Remove default margin to ensure full height */
+}
+
+/* Main content styles */
+.main-content {
+  padding: 1rem;
+  flex: 1; /* Allow main content to grow and take remaining height */
+}
+
+/* Footer styles */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Navigation styles */
+.navbar {
+  background-color: #eee;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 1rem;
+}
+
+/* Spinner styles */
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Custom styles for your layout */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
