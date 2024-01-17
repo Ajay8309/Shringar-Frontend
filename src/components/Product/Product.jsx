@@ -7,6 +7,7 @@ import { Heart } from 'react-feather';
 import { useState, useEffect } from "react";
 
 const Product = ({ product, isInWishlistStatus, addToWishlist }) => {
+    
     const formattedPrice = new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR',

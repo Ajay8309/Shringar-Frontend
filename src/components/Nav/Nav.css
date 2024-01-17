@@ -1,4 +1,10 @@
-.nav {
+
+h1{
+    font-weight: 400;
+}
+
+
+.upperNav {
     height: 10vh;
     width: 100vw;
     background-color: #fde8e8;
@@ -10,6 +16,58 @@
     z-index: 1;
 }
 
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 32vh;
+}
+
+.lowerNav{
+    height: 8vh;
+    margin-top: 80px;
+    /* border: 2px solid red; */
+}
+
+.thirNav {
+    /* border: 2px solid red; */
+    height: 9vh;
+    background-color: #fde8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thirNav p {
+    margin: 35px;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.fourthNav {
+    /* border: 2px solid red; */
+    height: 6vh;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    padding: 5px 48px;
+}
+
+.filterIcon {
+    cursor: pointer;
+}
+
+
+.fixed {
+    position: fixed;
+    top: 80px;
+    width: 99.8vw;
+    z-index: 1;
+
+}
 .AccountBox {
     /* border: 2px solid black; */
 }
@@ -142,7 +200,7 @@ ul {
   position: absolute;
   top: 100%;
   z-index: 1;
-  left: -57px;
+  left: -128px;
   background-color: #fff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border: 1px solid #ddd;
@@ -193,10 +251,127 @@ ul {
     text-decoration: none;
 }
 
+.lowerNavLinks {
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+}
 
+/* .filterWindow {
+    border: 2px solid red;
+    height: 25vh;
+    width: 25vw;
+} */
+
+.filterWindow {
+    position: fixed;
+    top: 160px;
+    left: 0;
+    z-index: 1;
+    height: 53%;
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    /* border: 2px solid red; */
+    padding: 20px;
+}
+
+.filterWindow.open {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .closeButton {
+    margin-top: 20px;
+    padding: 10px;
+    background-color:  #fde8e8;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .filterContainer {
+    /* border: 2px solid red; */
+  }
+  
+  .filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .filterItem {
+    flex: 1 1 200px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .applyFilters {
+    /* border: 2px solid red; */
+    margin-top: 40px;
+    margin-left: 204px;
+    height: 40px;
+    display: flex;
+    background-color: #fde8e8;
+    width: 106px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+  
+  /* Add this CSS to your stylesheets */
+
+.AccountBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: auto;
+  }
+  
+  .name {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .name p {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .profile,
+  .orders,
+  .logout {
+    margin-top: 10px;
+  }
+  
+  .underline {
+    text-decoration: underline;
+  }
+  
+  /* Add more styling as needed */
+  
 
 @media screen and (max-width: 886px) {
-    .nav {
+    .upperNav {
         display: flex;
         flex-direction: column;
         height: 25vh;

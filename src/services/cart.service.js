@@ -19,7 +19,7 @@ class cartService {
     }
 
     async decrement(product_id) {
-        return API.put("/card/decrement", {product_id});
+        return API.put("/cart/decrement", {product_id});
     }
 }
 

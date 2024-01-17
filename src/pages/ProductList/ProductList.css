@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 2rem;
-  padding: 60px 18px 38px 47px;
+  padding: 0px 18px 38px 47px;
   min-height: 50vh;
 }
 
@@ -41,6 +41,8 @@
   background-color: #007bff;
   color: #fff;
 }
+
+
 
 @media screen and (max-width: 886px) {
   .product-list {

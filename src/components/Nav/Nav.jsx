@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useCart} from "../../context/CartContext"
 import {useUser} from "../../context/UserContext"
 import {useWishlist} from "../../context/WishlistContext"
@@ -8,8 +8,13 @@ import { Link } from 'react-router-dom'
 import {Badge, Button, Dropdown, DropdownItem, Transition} from "@windmill/react-ui"
 import './Nav.css'
 import { FaSearch, FaShoppingCart} from 'react-icons/fa';
-import Spinner from '../Spinner/Spinner'
-
+import Spinner from '../Spinner/Spinner';
+import { Filter } from 'react-feather';
+import FilterWindow from '../FilterWindow'
+import { useFilter } from '../../context/FilterContext'
+import { useProduct } from '../../context/ProductContext'
+// import { useHistory } from 'react-router-dom';
+// import {ProductService} from "../../services/product.service"
 
 
 const Nav = () => {
@@ -18,9 +23,54 @@ const Nav = () => {
   const {isLoggedIn, userData, logout} = useUser(); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isThirdNavFixed, setIsThirdNavFixed] = useState(false);
+  const [isFilterWindowOpen, setIsFilterWindowOpen] = useState(false); 
+
+  
+
+  const {setPage, updateFilters } = useProduct();
+  // const history = useHistory();
+
+  const handleScroll = () => {
+    if (window.scrollY > 120) {
+      setIsThirdNavFixed(true);
+    } else {
+      setIsThirdNavFixed(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const toggleFilterWindow = () => {
+    setIsFilterWindowOpen(!isFilterWindowOpen);
+  };
+  
+  const applyFilters = (filters) => {
+    console.log('Applying filters:', filters);
+
+    // Assuming that you have a function in ProductContext to update filters
+    // and fetch products based on filters
+    updateFilters(filters);
+
+    // If you need to reset the page to 1 when applying filters
+    setPage(1);
+
+    // Close the filter window
+    toggleFilterWindow();
+  };
+
+  
+  
+
 
   return (
     <nav className='nav'>
+       <div className="upperNav">
 
       <Link to="/" className='Logo'>
        <h1>
@@ -126,6 +176,31 @@ const Nav = () => {
           </>
         )}
       </ul>
+       </div>
+
+       <div className="lowerNav ">
+        <ul className="lowerNavLinks">
+          <li className="link">All Jewellery</li>
+          <li className="link">Gold</li>
+          <li className="link">Rings</li>
+          <li className="link">Braclet</li>
+        </ul>
+       </div>
+
+       <div className={`thirNav`}>
+         <p>Home | All Jewellery</p> 
+          <p>Gold Festival</p>
+      </div>
+
+      <div className={`fourthNav ${isThirdNavFixed ? 'fixed' : ''}`}>
+        <Filter size={27} className='filterIcon' onClick={toggleFilterWindow} />
+      </div>
+
+    
+      {isFilterWindowOpen && <FilterWindow onClose={toggleFilterWindow}
+       isFilterWindowOpen={isFilterWindowOpen} 
+       onApply={applyFilters}
+       />}
     
     </nav>
   )

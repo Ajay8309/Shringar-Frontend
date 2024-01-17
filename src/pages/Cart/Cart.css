@@ -1,0 +1,75 @@
+.cartTitle {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid red; */
+}
+
+
+/* Add this CSS to your stylesheets */
+
+.itemCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 30px;
+    margin-bottom: 18px;
+    max-width: 347px;
+  }
+  
+  .product-image {
+    width: 155px;
+    height: 189px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .product-details {
+    flex-grow: 1;
+  }
+  
+  .product-name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+  }
+  
+  .quantity-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity {
+    margin: 0 10px;
+  }
+  
+  .increment-button,
+  .decrement-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .remove-button {
+    background-color: #ff4d4f;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

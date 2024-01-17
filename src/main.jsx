@@ -8,6 +8,7 @@ import {ProductProvider} from "./context/ProductContext.jsx"
 import {WishlistProvider} from "./context/WishlistContext.jsx"
 import {ReviewProvider} from "./context/ReviewContext.jsx"
 import {HelmetProvider} from "react-helmet-async"
+import {FilterProvider} from "./context/FilterContext.jsx"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
        <ReviewProvider>
         <CartProvider>
           <WishlistProvider>
+            <FilterProvider>
              <App />
+            </FilterProvider>
           </WishlistProvider>
         </CartProvider>
        </ReviewProvider>

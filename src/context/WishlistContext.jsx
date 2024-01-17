@@ -3,6 +3,8 @@ import {createContext, useContext, useEffect, useState} from "react";
 import wishlistService from "../services/wishlist.service";
 import {useUser} from "./UserContext";
 import cartService from "../services/cart.service";
+import { useCart } from "./CartContext";
+import localCart from "../helpers/localStorageCart";
 
 const WishlistContext = createContext();
 
@@ -12,6 +14,8 @@ const WishlistProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [wishlistTotal, setWishlistTotal] = useState(0);
     const {userData} = useUser();
+
+    const {setCartData} = useCart();
 
     useEffect(() => {
         setIsLoading(true);
@@ -61,18 +65,22 @@ const WishlistProvider = ({children}) => {
         }
     }
 
-    const deleteItem =  (product_id) => {
-        if(isLoggedIn) {
-           const {items} = wishlistData;
-           wishlistService.removeFromWishist(product_id).then(() => {
-            const data = items.filter((item) => item.product_id !== product_id);
-            setWishlistData({...wishlistData, items:data});
-           })
+    const deleteItem = async (product_id) => {
+        if (isLoggedIn) {
+            try {
+                console.log("DeleteItem"+product_id);
+                const { items } = wishlistData;
+                await wishlistService.removeFromWishlist(product_id);
+                const data = items.filter((item) => item.product_id !== product_id);
+                setWishlistData({ ...wishlistData, items: data });
+            } catch (error) {
+                console.error("Error deleting item from wishlist:", error);
+            }
         } else {
             LocalWishlist.removeItem(product_id);
-            setWishlistData({...wishlistData, items:LocalWishlist.getItems()});
+            setWishlistData({ ...wishlistData, items: LocalWishlist.getItems() });
         }
-    }
+    };
 
     
 
@@ -83,6 +91,32 @@ const WishlistProvider = ({children}) => {
           return LocalWishlist.getItems().some((item) => item.product_id === product_id);
         }
       };
+
+      const moveItemToCart = async (product_id, quantity = 1) => {
+        try {
+            
+            if (isLoggedIn) {
+                console.log("moveItemToCart"+product_id);
+                await wishlistService.removeFromWishlist(product_id);
+                const updatedWishlist = wishlistData?.items.filter(item => item.product_id !== product_id);
+                setWishlistData({ items: updatedWishlist });
+            } else {
+                LocalWishlist.removeItem(product_id);
+                setWishlistData({ ...wishlistData, items: LocalWishlist.getItems() });
+            }
+
+            
+            if (isLoggedIn) {
+                const { data } = await cartService.addToCart(product_id, quantity);
+                setCartData({ items: [...data.data] });
+            } else {
+                localCart.addItem(product, quantity);
+                setCartData({ ...cartData, items: localCart.getItems() });
+            }
+        } catch (error) {
+            console.error("Error moving item to cart:", error);
+        }
+    };
     
 
     return (
@@ -94,7 +128,8 @@ const WishlistProvider = ({children}) => {
             addItem,
             deleteItem,
             wishlistTotal,
-            isInWishlist 
+            isInWishlist,
+            moveItemToCart 
           }}
         >
 

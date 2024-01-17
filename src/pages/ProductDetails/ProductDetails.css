@@ -1,25 +1,35 @@
 .product-details-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    margin-left: 34px;
-    margin-top: 158px;
-    margin-right: 34px;
-    /* border: 2px solid red; */
-    flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  margin-left: 34px;
+  height: 67vh;
+  margin-top: 74px;
+  margin-right: 34px;
+  /* border: 2px solid red; */
+  flex-direction: column;
   }
   
   .product-details-image img {
-    max-width: 300px;
+    max-width: 350px;
     border-radius: 8px;
+    border: 2px solid;
+    max-width: 350px;
+    border-radius: 8px;
+    margin-top: 80px;
+    border: 2px solid;
   }
   
   .product-details-info {
     flex: 1;
-    padding: 56px 20px;
+    padding: 12px;
+    display: flex;
+    padding-left: 5rem;
+    width: 32vw;
+    flex-direction: column;
     /* border: 2px solid red; */
-    align-items: center;
+    align-items: start;
   }
   
   .product-details-info h2 {
@@ -59,3 +69,28 @@
   .productInfoContainer {
     display: flex;
   }
+
+  .underlineName {
+    border-bottom: 1px solid rgb(11, 11, 11);
+    width: 30vw;
+  }
+
+  .titleName {
+    display: flex;
+    /* border: 2px solid red; */
+    width: 30vw;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .titleName button {
+    background: none;
+    border: none;
+  }
+
+  .wishlistIcon {
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  

@@ -42,7 +42,7 @@
 }
 
 .cardBody {
-  padding: 16px;
+  padding: 0px 14px;
 }
 
 h2 {
@@ -105,7 +105,7 @@ h2 {
 .cardBody h2,
 .cardBody .price {
   margin-bottom: 8px;
-  font-size: 1.2em;
+  font-size: 1em;
   text-decoration: none; /* Remove underlines */
   color: #333; /* Set text color */
 }
@@ -114,10 +114,35 @@ h2 {
   font-size: 1.1em;
   color: #2ecc71;
   font-weight: bold;
-}
+} 
 
 .underline{
   text-decoration: none;
+}
+
+.priceName {
+  display: flex;
+  width: 15vw;
+  display: flex;
+  /* border: 2px solid red; */
+  justify-content: space-between;
+}
+
+.cardBody {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 12vh;
+    /* border: 2px solid red; */
+    flex-direction: column;
+}
+
+.removeWishlistItemDelete {
+  height: 5vh;
+  width: 15vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 /* Product.css */
 

@@ -16,7 +16,7 @@ class WishlistService {
   }
 
   async isInWishlist(product_id) {
-    console.log(product_id);
+    // console.log(product_id);
     return await API.get("/wishlist/check", {
       data: { product_id: Number(product_id) },
     });

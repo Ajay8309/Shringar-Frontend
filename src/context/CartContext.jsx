@@ -41,10 +41,12 @@ const CartProvider = ({ children }) => {
     useEffect(() => {
         const quantity = cartData?.items?.reduce((acc, cur) => acc + Number(cur.quantity), 0) || 0;
         const TotalAmt = cartData?.items?.reduce((acc, cur) => acc + Number(cur.subtotal), 0) || 0;
-
+        // console.log(TotalAmt);
         setCartSubTotal(TotalAmt);
         setCartTotal(quantity);
     }, [cartData]);
+
+    
 
     const addItem = async (product, quantity) => {
         if(isLoggedIn) {

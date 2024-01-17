@@ -3,9 +3,10 @@ import { Suspense } from 'react'
 import Spinner from "./components/Spinner/Spinner";
 import {Toaster} from "react-hot-toast"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import {Login, Register, ProductList, ProductDetails} from './pages'
+import {Login, Register, ProductList, ProductDetails, Cart, Wishlist} from './pages'
 import Layout from './layout/layout';
 // import ProtectedRoute from "./routes/protected.route"
+
 
 const App = () => {
   return (
@@ -24,6 +25,8 @@ const App = () => {
       <Route index element={<ProductList />} />
       <Route path="/login" element = {<Login/>}/>
       <Route path="/products/:id" element={<ProductDetails/>}/>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/wishlist" element={<Wishlist />} />
     </Routes>
      
     </BrowserRouter>

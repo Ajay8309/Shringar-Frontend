@@ -1,7 +1,7 @@
 import Nav from "../components/Nav/Nav";
 import Spinner from "../components/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
-import "./layout.css"
+import "../layout/layout.css"
 
 const Layout = ({ children, title, loading }) => {
   return (
@@ -18,6 +18,7 @@ const Layout = ({ children, title, loading }) => {
           content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
         <link rel="canonical" href="" />
+        
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Shringar" />
@@ -47,7 +48,7 @@ const Layout = ({ children, title, loading }) => {
         </header>
         {loading ? (
           <div className="spinner-container">
-            <Spinner size={100} loading />
+            <Spinner size={500} loading  className="spinner"/>
           </div>
         ) : (
           <div className="main-content">

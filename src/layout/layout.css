@@ -25,6 +25,7 @@ body {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  /* border: 2px solid red; */
 }
 
 .navbar a {
@@ -39,6 +40,14 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+.spinner {
+  /* border: 2px solid red; */
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Custom styles for your layout */
