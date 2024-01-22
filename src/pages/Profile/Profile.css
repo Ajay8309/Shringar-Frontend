@@ -1,0 +1,152 @@
+/* Profile.css */
+
+.profile-container {
+  display: grid;
+  place-items: center;
+  padding-top: 4rem;
+  /* margin-top: 10rem; */
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 32rem; /* Adjust based on your design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 0.375rem;
+}
+
+.profile-header {
+  padding: 1.25rem;
+}
+
+.profile-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.profile-subtitle {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.profile-content {
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Add more styles for profile details if needed */
+
+.profile-action {
+  padding: 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-edit {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+/* Add more styles as needed */
+
+/* Add these styles to Profile.css */
+
+.profile-details {
+  width: 100%;
+  max-width: 32rem; /* Adjust based on your design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 0.375rem;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-row dt {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.profile-row dd {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.profile-edit {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+
+.account-form-container {
+  display: grid;
+  place-items: center;
+  padding-top: 4rem;
+  /* margin-top: 10rem; */
+}
+
+.account-form-card {
+  width: 100%;
+  max-width: 24rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 0.375rem;
+}
+
+.account-form-header {
+  padding: 1.5rem;
+}
+
+.account-form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-transform: capitalize;
+}
+
+.account-form-content {
+  border-top: 1px solid #e2e8f0;
+}
+
+.account-form-label {
+  background-color: #f7fafc;
+  padding: 1rem;
+}
+
+.account-form-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.account-form-helper-text {
+  color: #e53e3e;
+  font-size: 0.875rem;
+}
+
+.account-form-actions {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-form-button {
+  width: 48%;
+}
+
+.account-form-button-outline {
+  width: 48%;
+  background-color: transparent;
+  border: 1px solid #4299e1;
+  color: #4299e1;
+}
+

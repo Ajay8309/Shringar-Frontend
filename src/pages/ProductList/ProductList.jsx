@@ -14,9 +14,10 @@ const ProductList = () => {
   const { isInWishlist, addItem } = useWishlist();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const checkIsInWishlist = async (productId) => {
-    const isInWishlistResult = await isInWishlist(productId);
-    return isInWishlistResult;
+  const checkIsInWishlistForProducts = async (productIds) => {
+    const promises = productIds.map((productId) => isInWishlist(productId));
+    const results = await Promise.all(promises);
+    return results;
   };
 
   const handleAddToWishlist = async (product) => {
@@ -29,7 +30,7 @@ const ProductList = () => {
     window.scrollTo({ behavior: "smooth", top: 0 });
   };
 
-  if (!products) {
+  if (!Array.isArray(products)) {
     return (
       <>
         <Layout>
@@ -39,14 +40,16 @@ const ProductList = () => {
     );
   }
 
+  const productIds = products.map((prod) => prod.product_id);
+
   return (
     <Layout>
       <div className="product-list">
-        {products?.map((prod) => (
+        {products.map((prod, index) => (
           <div key={prod.product_id} className="product-card">
             <Product
               product={prod}
-              isInWishlistStatus={checkIsInWishlist(prod.product_id)}
+              isInWishlistStatus={checkIsInWishlistForProducts([prod.product_id])[index]}
               addToWishlist={() => handleAddToWishlist(prod)}
             />
           </div>

@@ -28,6 +28,17 @@ const ProductProvider = ({ children }) => {
         setIsLoading(false);
       });
     }, [filters]);
+
+    const getProductsByName = (name) => {
+      setIsLoading(true);
+    
+      productService.getProductByName(name).then((response) => {
+        setProducts(response.data);
+        // console.log(response.data);
+        setIsLoading(false);
+      });
+    };
+    
     
     
     const updateFilters = (newFilters) => {
@@ -45,6 +56,7 @@ const ProductProvider = ({ children }) => {
           setPage,
           filters,
           updateFilters,
+          getProductsByName
         }}
       >
         {children}

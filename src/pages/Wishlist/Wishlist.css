@@ -1,7 +1,14 @@
 .addItemToCart {
-   /* border: 2px solid red; */
+    border: 1px solid black;
+    background: none;
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 6px;
 }
 
 .removeWishlistItem {
-    /* border: 2px solid red; */
+    background: none;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 3px;
 }

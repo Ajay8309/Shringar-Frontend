@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import { Suspense } from 'react'
 import Spinner from "./components/Spinner/Spinner";
 import {Toaster} from "react-hot-toast"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import {Login, Register, ProductList, ProductDetails, Cart, Wishlist} from './pages'
+import {Login, Register, ProductList, ProductDetails, Cart, Wishlist, Profile} from './pages'
 import Layout from './layout/layout';
 // import ProtectedRoute from "./routes/protected.route"
 
@@ -27,6 +27,7 @@ const App = () => {
       <Route path="/products/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<Wishlist />} />
+      <Route path='/profile' element = {<Profile/>}></Route>
     </Routes>
      
     </BrowserRouter>

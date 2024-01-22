@@ -28,7 +28,7 @@ const Nav = () => {
 
   
 
-  const {setPage, updateFilters } = useProduct();
+  const {setPage, updateFilters, getProductsByName } = useProduct();
   // const history = useHistory();
 
   const handleScroll = () => {
@@ -64,7 +64,11 @@ const Nav = () => {
     toggleFilterWindow();
   };
 
-  
+  const handleSearch = () => {
+    updateFilters({});
+    setPage(1);
+    getProductsByName(searchQuery);
+  };
   
 
 
@@ -79,7 +83,7 @@ const Nav = () => {
       </Link>
       
       <div className="searchBox">
-      <form  className='searchBox'> 
+      <form  className='searchBox' onSubmit={(e) => e.preventDefault()}> 
       {/* Search logic is remaining  */}
           <input
             type='text'
@@ -89,7 +93,7 @@ const Nav = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </form>
-        <button className='search'>
+        <button className='search' onClick={handleSearch}>
           <FaSearch className='searchBtn'/>
         </button>
       </div>

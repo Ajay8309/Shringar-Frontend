@@ -36,7 +36,7 @@ const UserProvider = ({ children }) => {
 
     const updateUserData = async ({ fullname, email, username, address, city, state, country }) => {
         try {
-            const res = await API.put(`users/${userData.user_id}`, {
+            const res = await API.put(`user/${userData.user_id}`, {
                 fullname,
                 email,
                 username,
@@ -46,6 +46,7 @@ const UserProvider = ({ children }) => {
                 country,
             });
             setUserData(res.data);
+            console.log(res);
         } catch (error) {
             // Handle the error, e.g., network request failed
             console.error("Error updating user data:", error);
