@@ -3,20 +3,31 @@ import {useWishlist} from "../../context/WishlistContext"
 import { Link } from "react-router-dom"
 import "./Product.css"
 // import {formatCurrency} from "../helpers/formatCurrency"
-import { Heart } from 'react-feather';
+// import { Heart } from 'react-feather';
 import { useState, useEffect } from "react";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Product = ({ product, isInWishlistStatus, addToWishlist }) => {
+
+
+const Product = ({ product, addToWishlist }) => {
     
     const formattedPrice = new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR',
     }).format(product.price);
+
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+        addToWishlist();
+      };
    
     return (
         <div className="group">
-            <button className="wishlist" onClick={addToWishlist}>
-                <Heart size={25} className={`heart-icon ${isInWishlistStatus ? 'active' : 'inActive'}`} />
+            <button className="wishlist" onClick={toggleFavorite}>
+            <FontAwesomeIcon icon={faHeart} style={{ color: isFavorite ? "red" : "gray" }} />
             </button>
             <Link to={`products/${product.product_id}`} className="underline">
                 <img
@@ -27,7 +38,7 @@ const Product = ({ product, isInWishlistStatus, addToWishlist }) => {
                     decoding="async"
                     title={product.name}
                 />
-                <div className="cardBody">
+                <div className="cardBodyy">
                     <h2>{product.name}</h2>
                     <p className="price">{formattedPrice}</p>
                 </div>

@@ -12,3 +12,31 @@
     border-radius: 7px;
     padding: 3px;
 }
+
+.cardBody h2,
+.cardBody .price {
+  margin-bottom: 8px;
+  font-size: .9em;
+  text-decoration: none; 
+  color: #333;
+}
+
+.cardBody {
+    display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 12vh;
+      /* border: 2px solid red; */
+      flex-direction: column;
+  }
+
+  .cardBody {
+    padding: 16px;
+  }
+
+  
+  .cardBody h2, .cardBody .price {
+    text-decoration: none;
+    color: #0d0909; 
+  }
+

@@ -34,10 +34,27 @@ const ProductProvider = ({ children }) => {
     
       productService.getProductByName(name).then((response) => {
         setProducts(response.data);
-        // console.log(response.data);
         setIsLoading(false);
       });
     };
+
+    const getProductByCategory = (category) => {
+      setIsLoading(true);
+      productService.getProductsByCategory(category).then((response) => {
+        setProducts(response.data);
+        setIsLoading(false);
+      });
+    };
+    
+    
+
+    const getProductByMaterial = (material) => {
+      setIsLoading(true);
+      productService.getProductsByMaterialType(material).then((response) => {
+        setProducts(response.data);
+        setIsLoading(false);
+      })
+    }
     
     
     
@@ -56,7 +73,9 @@ const ProductProvider = ({ children }) => {
           setPage,
           filters,
           updateFilters,
-          getProductsByName
+          getProductsByName,
+          getProductByCategory, 
+          getProductByMaterial
         }}
       >
         {children}

@@ -44,16 +44,17 @@ const WishlistProvider = ({children}) => {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
-        setWishlistTotal(quantity);
-    }, [wishlistData, setWishlistData]);
+        setIsLoading(false);
+            const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
+            setWishlistTotal(quantity);
+            setIsLoading(true);
+    }, [wishlistData]); 
     
 
 
     const addItem = async (product) => {
         if(isLoggedIn) {
             try {
-                // console.log(userData.user_id);
                 const {data} = await wishlistService.addToWishlist(product.product_id);
                 setWishlistData({items: [...data.data]});
             } catch (error) {
@@ -68,7 +69,7 @@ const WishlistProvider = ({children}) => {
     const deleteItem = async (product_id) => {
         if (isLoggedIn) {
             try {
-                console.log("DeleteItem"+product_id);
+                // console.log("DeleteItem"+product_id);
                 const { items } = wishlistData;
                 await wishlistService.removeFromWishlist(product_id);
                 const data = items.filter((item) => item.product_id !== product_id);
@@ -96,7 +97,7 @@ const WishlistProvider = ({children}) => {
         try {
             
             if (isLoggedIn) {
-                console.log("moveItemToCart"+product_id);
+                // console.log("moveItemToCart"+product_id);
                 await wishlistService.removeFromWishlist(product_id);
                 const updatedWishlist = wishlistData?.items.filter(item => item.product_id !== product_id);
                 setWishlistData({ items: updatedWishlist });

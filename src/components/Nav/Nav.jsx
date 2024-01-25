@@ -5,9 +5,8 @@ import {useUser} from "../../context/UserContext"
 import {useWishlist} from "../../context/WishlistContext"
 import {LogOut, ShoppingCart, User, Heart} from "react-feather"
 import { Link } from 'react-router-dom'
-import {Badge, Button, Dropdown, DropdownItem, Transition} from "@windmill/react-ui"
 import './Nav.css'
-import { FaSearch, FaShoppingCart} from 'react-icons/fa';
+import { FaSearch} from 'react-icons/fa';
 import Spinner from '../Spinner/Spinner';
 import { Filter } from 'react-feather';
 import FilterWindow from '../FilterWindow'
@@ -28,8 +27,9 @@ const Nav = () => {
 
   
 
-  const {setPage, updateFilters, getProductsByName } = useProduct();
-  // const history = useHistory();
+  const {setPage, updateFilters, getProductsByName, getProductByCategory,
+     getProductsByMaterial} = useProduct();
+
 
   const handleScroll = () => {
     if (window.scrollY > 120) {
@@ -52,15 +52,8 @@ const Nav = () => {
   
   const applyFilters = (filters) => {
     console.log('Applying filters:', filters);
-
-    // Assuming that you have a function in ProductContext to update filters
-    // and fetch products based on filters
     updateFilters(filters);
-
-    // If you need to reset the page to 1 when applying filters
     setPage(1);
-
-    // Close the filter window
     toggleFilterWindow();
   };
 
@@ -184,9 +177,9 @@ const Nav = () => {
 
        <div className="lowerNav ">
         <ul className="lowerNavLinks">
-          <li className="link">All Jewellery</li>
-          <li className="link">Gold</li>
-          <li className="link">Rings</li>
+          <li className="link" >All Jewellery</li>
+          <li className="link" onClick={() => {getProductsByMaterial('gold')}}>Gold</li>
+          <li className="link" onClick={() => {getProductByCategory('Rings')}}>Rings</li>
           <li className="link">Braclet</li>
         </ul>
        </div>

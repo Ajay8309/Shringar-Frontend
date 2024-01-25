@@ -81,7 +81,7 @@ const Login = () => {
 
   return (
     <div className="MainContainer">
-      <div className="container">
+      <div className="containerNav">
 
      <div className="leftContainer">
         <div className="imgWrapper">

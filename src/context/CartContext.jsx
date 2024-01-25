@@ -1,6 +1,8 @@
 import localCart from "../helpers/localStorageCart";
+import LocalWishlist from "../helpers/localStorageWishlist"
 import {createContext, useContext, useEffect, useState} from 'react';
 import cartService from "../services/cart.service";
+import wishlistService from "../services/wishlist.service";
 import {useUser} from "./UserContext";
 
 const CartContext = createContext();
@@ -98,6 +100,29 @@ const CartProvider = ({ children }) => {
         }
     };
 
+    const moveCartItemToWishlist = async (product_id, quantity = 1) => {
+        try {
+            if (isLoggedIn) {
+                await cartService.removeFromCart(product_id);
+                const updatedCart = cartData?.items.filter(item => item.product_id !== product_id);
+                setCartData({ items: updatedCart });
+            } else {
+                localCart.removeItem(product_id);
+                setCartData({ ...cartData, items: localCart.getItems() });
+            }
+
+            if (isLoggedIn) {
+                const { data } = await wishlistService.addToWishlist(product_id);
+                setWishlistData({ items: [...data.data] });
+            } else {
+                LocalWishlist.addItem(product_id);
+                setWishlistData({ ...wishlistData, items: LocalWishlist.getItems() });
+            }
+        } catch (error) {
+            console.error("Error moving item to wishlist:", error);
+        }
+    };
+
     return (
         <CartContext.Provider
             value={{
@@ -110,6 +135,7 @@ const CartProvider = ({ children }) => {
                 decrement,
                 cartTotal,
                 cartSubTotal,
+                moveCartItemToWishlist
             }}
         >
             {children}

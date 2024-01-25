@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext";
 import "../pages/Cart/Cart.css"
 
 const CartItem = ({ item }) => {
-  const { decrement, increment, deleteItem } = useCart();
+  const { decrement, increment, deleteItem, moveCartItemToWishlist } = useCart();
 
   const formattedPrice = (amount) => {
     return new Intl.NumberFormat("en-IN", {
@@ -25,17 +25,16 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="itemCard">
-      {/* Small image of the product */}
-      <img src={item.image_url} alt={item.name} className="product-image" />
 
+      <div className="imagetxtContainer">
+      <img src={item.image_url} alt={item.name} className="product-image" />
       <div className="product-details">
-        {/* Product name */}
         <h3 className="product-name">{item.name}</h3>
 
-        {/* Product price */}
+        
         <p className="product-price">{formattedPrice(item.price)}</p>
 
-        {/* Quantity and buttons to increment/decrement */}
+       
         <div className="quantity-buttons">
           <Button onClick={decrease} className="decrement-button">
             -
@@ -46,11 +45,21 @@ const CartItem = ({ item }) => {
           </Button>
         </div>
       </div>
+      </div>
 
-      {/* Button to remove product from cart */}
+
+
+      <div className="CardItemButtons">
       <Button onClick={() => deleteItem(item.product_id)} className="remove-button">
         Remove
       </Button>
+
+      <Button onClick={() => moveCartItemToWishlist(item.product_id) }>
+        Move to wishlist
+      </Button>
+      </div>
+
+      
     </div>
   );
 };

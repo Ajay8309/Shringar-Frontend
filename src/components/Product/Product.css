@@ -28,6 +28,7 @@
   cursor: pointer;
   outline: none;
   transition: color 0.3s ease, background-color 0.3s ease;
+  font-size: 20px;
 }
 
 .wishlist.active {
@@ -41,7 +42,7 @@
   border-bottom: 1px solid #ddd; /* Added a subtle border at the bottom of the image */
 }
 
-.cardBody {
+.cardBodyy {
   padding: 0px 14px;
 }
 
@@ -61,6 +62,7 @@ h2 {
 .heart-icon {
   font-size: 1.5em;
   margin: 0;
+  color: rgb(235, 15, 15);
 }
 
 .heart-icon.active {
@@ -84,9 +86,9 @@ h2 {
 }
 
 /* Add the following styles */
-.cardBody h2, .cardBody .price {
+.cardBodyy h2, .cardBodyy .price {
   text-decoration: none;
-  color: #333; /* Set text color */
+  color: #0d0909; /* Set text color */
 }
 
 /* ... existing styles ... */
@@ -102,10 +104,10 @@ h2 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.cardBody h2,
-.cardBody .price {
+.cardBodyy h2,
+.cardBodyy .price {
   margin-bottom: 8px;
-  font-size: 1em;
+  font-size: .9em;
   text-decoration: none; /* Remove underlines */
   color: #333; /* Set text color */
 }
@@ -123,18 +125,18 @@ h2 {
 .priceName {
   display: flex;
   width: 15vw;
-  display: flex;
+  /* display: flex; */
   /* border: 2px solid red; */
   justify-content: space-between;
 }
 
-.cardBody {
+.cardBodyy {
   display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 12vh;
+    height: 5vh;
     /* border: 2px solid red; */
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .removeWishlistItemDelete {
@@ -171,7 +173,7 @@ h2 {
   height: auto;
 }
 
-.cardBody {
+.cardBodyy {
   padding: 16px;
 }
 

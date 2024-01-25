@@ -13,6 +13,15 @@ class LocalWishlist {
     }
     
   clearWishlist = () => localStorage.removeItem("__wishlist");
+
+  addItem = (product) => {
+    if (this.isExist(product.product_id)) { 
+      return ;
+    } else {
+        this.saveItems([...this.getItems(), { product_id: product.product_id }]);
+    }
+};
+
 }
 
 export default new LocalWishlist();

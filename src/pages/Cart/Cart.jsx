@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import {
   Button,
@@ -19,7 +17,7 @@ import { Link } from "react-router-dom";
 import "./Cart.css";
 
 const Cart = () => {
-  const { cartData, isLoading, cartSubtotal } = useCart();
+  const { cartData, isLoading, cartSubTotal } = useCart();
 
   const formattedPrice = (amount) => {
     return new Intl.NumberFormat("en-IN", {
@@ -44,18 +42,31 @@ const Cart = () => {
       </Layout>
     );
   }
+  
 
   return (
     <Layout loading={isLoading || cartData === undefined}>
         <h1 className='cartTitle'>Shopping Cart</h1>
       <div className="container">
-        {cartData?.items?.map((item) => {
-          return (
-            <div key={item.product_id}>
-              <CartItem item={item}/>
-            </div>
-          )
-        })}
+      <div className="cartItemCardWithScrollbar">
+  {cartData?.items?.map((item) => (
+    <div key={item.product_id}>
+      <CartItem item={item} />
+    </div>
+  ))}
+</div>
+
+
+
+        <div className="TotalDetails">
+          cart Total :  {cartSubTotal}
+        </div>
+
+        <div className="checkoutButton">
+          <Button tag = {Link} to={"/checkout"} state={{fromCartPage : true}}>
+            Checkout
+          </Button>
+        </div>
       </div>
     </Layout>
   );

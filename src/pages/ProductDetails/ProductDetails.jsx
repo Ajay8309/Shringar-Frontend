@@ -86,13 +86,16 @@ const formattedPrice = (amount) => {
                             <div className="titleName">
                               <div className="nameStarComponent">
                                 <h2>{product.name}</h2>
+                                <div className="wishlistStarContainer">
                                 <ReactStars
                                    count={5}
                                    size={21}
                                    edit={false}
                                    value={+product?.avg_rating}
                                    activeColor="#ffd700"
-                                />
+                                /> 
+                                <span>{product.review_count} Review</span>
+                                </div>
                               </div>
 
                                 <button onClick={handleAddToWishlist}>
@@ -119,7 +122,6 @@ const formattedPrice = (amount) => {
                             <p className="txt1"> <Truck size={19}/> <span className='txtSpan'>Free Shipping all across India</span></p>
                             <span className="hr"></span>
 
-                    
                         </div>
                     </div>
                     <div className="product-reviews">
