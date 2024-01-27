@@ -24,6 +24,11 @@ To make Shringar an even more delightful experience, we are considering the foll
 - **Product Comparison:** Enable users to compare similar products side by side for a more informed decision-making process.
 - **Chat Assistance:** Implement a live chat feature to provide real-time assistance to users, answering queries and offering personalized recommendations.
 
+## Next Steps
+After the successful development of the Shringar project, the next step is to build an Admin Panel. The Admin Panel will empower administrators to efficiently manage users, products, and orders. This dedicated tool will streamline administrative tasks, ensuring a seamless operation of the e-commerce platform.
+
+## Usage
+
 ## Usage
 ### Prerequisites:
 - Node.js and npm installed
