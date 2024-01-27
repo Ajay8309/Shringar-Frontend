@@ -26,8 +26,7 @@ Shringar is a full-featured jewelry e-commerce site developed with React, Contex
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/your-username/shringar.git
-   cd shringar
+   git clone https://github.com/Ajay8309/Shringar-Frontend.git
 
 
 
