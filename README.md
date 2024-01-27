@@ -11,6 +11,7 @@ Shringar is a full-featured jewelry e-commerce site developed with React, Contex
 - **User Profile**: Users have a personalized profile with details and order history.
 - **Product Categories**: Products are categorized as gold and silver.
 - **Filtering**: Users can filter products based on category, price, and material type.
+- **Price Calculation**: Product prices are calculated based on weight, material type price, and making charges.
 - **Password Reset**: Users can reset their password if forgotten.
 - **Responsive Design**: The site is optimized for various screen sizes.
 
@@ -20,6 +21,8 @@ Shringar is a full-featured jewelry e-commerce site developed with React, Contex
 
 - Node.js and npm installed
 - PostgreSQL installed and running
+
+### Installation
 
 ### Installation
 
