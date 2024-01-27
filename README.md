@@ -3,7 +3,7 @@
 ## <span style="color: #0a138b">Description</span>
 **Shringar** is a full-featured jewelry e-commerce site developed with React, Context API, Node.js, Express, and PostgreSQL. The project includes features such as user authentication, a shopping cart, wishlist, order history, user profiles, product categories (gold and silver), filtering options, and responsive design. Notably, the product prices are calculated based on weight, material type price, and making charges.
 
-## <span style="color: #0a138b">Why?</span>
+## <span style="color: yellow">Why?</span>
 **Motivation behind Shringar:** The inspiration to create Shringar stems from a personal connection. As the child of a local jewelry store owner, the desire was to elevate the family business to the online world. The goal was to provide customers with a seamless and personalized experience, allowing them to explore and purchase jewelry items conveniently.
 
 ## <span style="color: #0a138b">Features</span>
