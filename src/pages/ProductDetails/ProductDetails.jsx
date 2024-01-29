@@ -15,7 +15,7 @@ const ProductDetails = () => {
     const { id } = useParams();
     const { addItem: addToCart } = useCart();
     const { addItem: addToWishlist } = useWishlist();
-    const { reviews, addReview, setProductId  } = useReview();
+    const { reviews, addReview, setProductId, reviewExistsError} = useReview();
 
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +30,7 @@ const ProductDetails = () => {
           const { data: product } = await ProductService.getProduct(id);
           setProduct(product);
           setProductId(id);
-
+        
         } catch (error) {
           console.error('Error fetching product:', error);
         } finally {
@@ -54,14 +54,19 @@ const ProductDetails = () => {
 
   const handleAddReview = async () => {
     try {
+      console.log(reviews);
+      if (reviews.reviews.some((e) => e.id === id)) {
+        alert("Review already exists");
+      }
       await addReview(id, newReviewRating, newReviewContent);
       setNewReviewRating(1);
       setNewReviewContent('');
     } catch (error) {
       console.error('Error adding review:', error);
+     
     }
   };
-console.log("ajay", reviews);
+// console.log("ajay", reviews);
 
 const formattedPrice = (amount) => {
   return new Intl.NumberFormat("en-IN", {

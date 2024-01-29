@@ -79,6 +79,8 @@ const Login = () => {
     return <Navigate to={state?.from || "/"} />;
   }
 
+  console.log("Ajay");
+
   return (
     <div className="MainContainer">
       <div className="containerNav">

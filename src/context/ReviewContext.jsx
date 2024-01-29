@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect } from "react";
 import reviewService from "../services/review.service";
 
@@ -8,21 +7,26 @@ const ReviewProvider = ({ children }) => {
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [productId, setProductId] = useState();
+    const [reviewExistsError, setReviewExistsError] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
         reviewService.getReviews(productId).then((response) => {
-          setReviews(response.data);
-          setIsLoading(false);
+            setReviews(response.data);
+            setIsLoading(false);
         });
-      }, [productId]);
-       
-
+    }, [productId]);
 
     const addReview = async (product_id, rating, content) => {
         try {
-            await reviewService.addReview(product_id, rating, content);
-            setProductId(product_id);
+            const response = await reviewService.addReview(product_id, rating, content);
+
+            if (response.status === 400) {
+                setReviewExistsError(true);
+            } else {
+                setProductId(product_id);
+                setReviewExistsError(false);
+            }
         } catch (error) {
             console.error("Error adding review:", error);
         }
@@ -38,7 +42,7 @@ const ReviewProvider = ({ children }) => {
     };
 
     return (
-        <ReviewContext.Provider value={{ reviews, setReviews, addReview, updateReview, setProductId }}>
+        <ReviewContext.Provider value={{ reviews, setReviews, addReview, updateReview, setProductId, reviewExistsError }}>
             {children}
         </ReviewContext.Provider>
     );
