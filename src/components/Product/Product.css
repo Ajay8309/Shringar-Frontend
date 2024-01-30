@@ -43,7 +43,7 @@
 }
 
 .cardBodyy {
-  padding: 0px 14px;
+  padding: 3px;
 }
 
 h2 {
@@ -132,12 +132,13 @@ h2 {
 
 .cardBodyy {
   display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    height: 5vh;
+    height: 10vh;
     /* border: 2px solid red; */
-    /* flex-direction: column; */
+    flex-direction: column;
 }
+
 
 .removeWishlistItemDelete {
   height: 5vh;

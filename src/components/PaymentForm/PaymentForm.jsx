@@ -7,7 +7,7 @@ import { useCart } from "../../context/CartContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import OrderService from "../../services/order.service";
+import OrderService from "../../services/order.service"; 
 import OrderSummary from "../OrderSummary";
 import PaystackBtn from "../PaystackBtn";
 
