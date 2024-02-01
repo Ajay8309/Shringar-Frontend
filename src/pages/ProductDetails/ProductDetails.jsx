@@ -13,7 +13,8 @@ import ReactStars from 'react-rating-stars-component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useProduct } from "../../context/ProductContext";
-import Product from "../../components/Product/Product";
+// import Product from "../../components/Product/Product";
+import SimilarItems from '../../components/SimilarItems';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -72,6 +73,10 @@ const ProductDetails = () => {
       currency: 'INR',
     }).format(amount);
   };
+
+  const formattedDate = (originalDate) => {
+    return originalDate.toISOString().split('T')[0];
+  }
 
   return (
     <Layout loading={isLoading}>
@@ -157,8 +162,10 @@ const ProductDetails = () => {
           {isReviewFormVisible && (
             <div className={`review-form ${isReviewFormVisible ? 'show' : ''}`}>
               <h4>Add Your Review</h4>
-              <label>
-                Rating:
+
+              <div className="ratingBox">
+                <div>Rating:</div>
+              <label className='ratingStars'>
                 <ReactStars
                   count={5}
                   size={24}
@@ -167,13 +174,18 @@ const ProductDetails = () => {
                   activeColor="#ffd700"
                 />
               </label>
-              <label>
-                Content:
+              </div>
+
+              <div className="reviewBox">
+                <div>Content:</div>
+              <label className='reviewContent'>
                 <textarea
+                  className='reviewContent2'
                   value={newReviewContent}
                   onChange={(e) => setNewReviewContent(e.target.value)}
                 />
               </label>
+              </div>
               <button onClick={handleAddReview}>Submit Review</button>
             </div>
           )}
@@ -185,6 +197,7 @@ const ProductDetails = () => {
         {reviews.reviews ? (
           reviews.reviews.map((review) => (
             <div key={review.id} className="review-item">
+            <div className="leftReviewContainer">
               <div className="user-info">
                 <div className="user-icon-container">
                   <FontAwesomeIcon icon={faUser} className="user-icon" />
@@ -201,6 +214,7 @@ const ProductDetails = () => {
                 />
               </div>
               <p className="review-content">{review.content}</p>
+              </div>
               <span className="review-time">{review.date}</span>
             </div>
           ))
@@ -210,7 +224,7 @@ const ProductDetails = () => {
       </div>
 
       
-      <h1>You May also Like</h1>
+      <h1>You May also like</h1>
 
       {product && products && (
   <div className="similarProductsByCategory">
@@ -220,7 +234,7 @@ const ProductDetails = () => {
         .slice(0, 5)
         .map((filteredProd, index) => (
           <div key={filteredProd.product_id} className="product-card">
-            <Product
+            <SimilarItems
               product={filteredProd}
               addToWishlist={() => handleAddToWishlist(filteredProd)}
             />

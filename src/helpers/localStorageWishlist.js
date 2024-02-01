@@ -20,6 +20,8 @@ class LocalWishlist {
     } else {
         this.saveItems([...this.getItems(), { product_id: product.product_id }]);
     }
+
+   
 };
 
 }

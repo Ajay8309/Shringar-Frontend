@@ -44,27 +44,32 @@ const WishlistProvider = ({children}) => {
     }, [isLoggedIn]);
 
     useEffect(() => {
+        const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
+        setWishlistTotal(prevTotal => quantity);
         setIsLoading(false);
-            const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
-            setWishlistTotal(quantity);
-            setIsLoading(true);
-    }, [wishlistData]); 
+    }, [wishlistData]);
+    
+    
     
 
 
     const addItem = async (product) => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             try {
-                const {data} = await wishlistService.addToWishlist(product.product_id);
-                setWishlistData({items: [...data.data]});
+                const { data } = await wishlistService.addToWishlist(product.product_id);
+                console.log("Wishlist Data after adding item:", data);
+                setWishlistData((prevData) => ({ items: [{ ...data.data[0], quant: 1 }, ...prevData.items] }));
             } catch (error) {
+                console.error("Error adding item to wishlist:", error);
                 return error;
             }
         } else {
             LocalWishlist.addItem(product);
-            setWishlistData({...wishlistData, items: LocalWishlist.getItems()});
+            console.log("Local Wishlist Items after adding item:", LocalWishlist.getItems());
+            setWishlistData((prevData) => ({ ...prevData, items: LocalWishlist.getItems() }));
         }
-    }
+    };
+    
 
     const deleteItem = async (product_id) => {
         if (isLoggedIn) {
