@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {useGoogleLogin} from "@react-oauth/google";
 import {Button, HelperText, Input, Label} from "@windmill/react-ui"
 // forgot pasword modal
+// import ForgotPasswordModal from '../../components/ForgotPasswordModal/ForgotPasswordModal';
 import { useUser } from "../../context/UserContext";
 import {useForm} from "react-hook-form";
 import { toast } from 'react-hot-toast';
@@ -150,7 +151,7 @@ const Login = () => {
             </HelperText>
           )}
           {/* <div className="">
-            <ForgotPasswordModal /> need to be added 
+            <ForgotPasswordModal /> 
           </div> */}
           <Button type="submit" disabled={isLoading || isGoogleLoading} className='btn1'>
             {isLoading ? <PulseLoader color={"#0a138b"} size={10} loading /> : "Login"}

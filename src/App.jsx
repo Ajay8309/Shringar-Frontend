@@ -5,7 +5,7 @@ import {Toaster} from "react-hot-toast"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import {Login, Register, ProductList, ProductDetails, Cart, Wishlist, Profile, Checkout} from './pages'
 import Layout from './layout/layout';
-// import ProtectedRoute from "./routes/protected.route"
+import ProtectedRoute from "./routes/protected.route"
 
 
 const App = () => {
@@ -21,9 +21,12 @@ const App = () => {
      <Toaster position="top-right" />
       
     <Routes>
+
+      {/* <ProtectedRoute> */}
       <Route path="/signup" element = {<Register/>}/>
-      <Route index element={<ProductList />} />
       <Route path="/login" element = {<Login/>}/>
+      {/* </ProtectedRoute> */}
+      <Route index element={<ProductList />} />
       <Route path="/products/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<Wishlist />} />

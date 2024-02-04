@@ -15,6 +15,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useProduct } from "../../context/ProductContext";
 // import Product from "../../components/Product/Product";
 import SimilarItems from '../../components/SimilarItems';
+import VirtualTryOn from '../../components/VirtualTryOn';
+// import Model from "../../assets/model.gltf"
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -28,6 +30,8 @@ const ProductDetails = () => {
   const [newReviewContent, setNewReviewContent] = useState('');
   const [newReviewRating, setNewReviewRating] = useState(1);
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
+  const [isVirtualTryOnVisible, setIsVirtualTryOnVisible] = useState(false); 
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +124,23 @@ const ProductDetails = () => {
 
               <div className="product-buttons">
                 <button onClick={handleAddToCart}>Add to Cart</button>
+                <button onClick={() => setIsVirtualTryOnVisible(!isVirtualTryOnVisible)}>
+                  Virtual Try-On
+                </button>
               </div>
+
+               {isVirtualTryOnVisible && (
+            <VirtualTryOn
+            product={{
+             
+              model_url: 'https://skfb.ly/oqqMB',
+              dimensions: { width: 100, height: 100 },
+             
+            }}
+              onClose={() => setIsVirtualTryOnVisible(false)}
+            />
+          )}
+
               <span className="hr"></span>
 
               <p className="txt1">
