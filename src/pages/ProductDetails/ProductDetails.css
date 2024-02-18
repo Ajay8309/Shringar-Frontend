@@ -329,6 +329,42 @@
   width: 100vw;
 }
 
+.similarProductsByCategory {
+  margin-bottom: 15px;
+}
+
+.fixed-product-details {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.fixed-product-details .img {
+  margin-right: 20px;
+}
+
+.fixed-product-details .img img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.fixed-product-details .details h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.fixed-product-details .details p {
+  font-size: 14px;
+  color: #666;
+}
 
 
 @media screen and (max-width: 886px) {

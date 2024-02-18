@@ -17,6 +17,12 @@ import { useProduct } from "../../context/ProductContext";
 import SimilarItems from '../../components/SimilarItems';
 import VirtualTryOn from '../../components/VirtualTryOn';
 // import Model from "../../assets/model.gltf"
+import Slider from 'react-slick'; 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import FixedProductDetails from '../../components/FixedProductDetails';
+
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -31,6 +37,8 @@ const ProductDetails = () => {
   const [newReviewRating, setNewReviewRating] = useState(1);
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
   const [isVirtualTryOnVisible, setIsVirtualTryOnVisible] = useState(false); 
+  const [showFixedProductDetails, setShowFixedProductDetails] = useState(false);
+
 
 
   useEffect(() => {
@@ -82,6 +90,79 @@ const ProductDetails = () => {
     return originalDate.toISOString().split('T')[0];
   }
 
+  const CustomPrevArrow = (props) => {
+    const { className, onClick } = props;
+    return <div className={className} onClick={onClick}><FontAwesomeIcon icon={faArrowLeft} /></div>;
+  };
+  
+  const CustomNextArrow = (props) => {
+    const { className, onClick } = props;
+    return <div className={className} onClick={onClick}><FontAwesomeIcon icon={faArrowRight} /></div>;
+  };
+  
+
+  
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5, 
+    slidesToScroll: 1, 
+    prevArrow: <CustomPrevArrow />, 
+    nextArrow: <CustomNextArrow />, 
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const productDetailsContainer = document.querySelector('.product-details-container');
+      if (productDetailsContainer) {
+        const isVisible = isElementInViewport(productDetailsContainer);
+        setShowFixedProductDetails(!isVisible);
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+
+  const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    // console.log(window.innerWidth);
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  };
+  
+  
+  
+
   return (
     <Layout loading={isLoading}>
       {product && (
@@ -131,12 +212,7 @@ const ProductDetails = () => {
 
                {isVirtualTryOnVisible && (
             <VirtualTryOn
-            product={{
-             
-              model_url: 'https://skfb.ly/oqqMB',
-              dimensions: { width: 100, height: 100 },
-             
-            }}
+            Product={product.image_url}
               onClose={() => setIsVirtualTryOnVisible(false)}
             />
           )}
@@ -244,25 +320,26 @@ const ProductDetails = () => {
       </div>
 
       
-      <h1>You May also like</h1>
+      <div className="similarProductsByCategory">
+        <h1>You May Also Like</h1>
+        <Slider {...settings}> 
+          {product &&
+            products &&
+            products
+              .filter((prod) => prod.category_name === product.category_name)
+              .slice(0, 5)
+              .map((filteredProd, index) => (
+                <div key={filteredProd.product_id} className="product-card">
+                  <SimilarItems
+                    product={filteredProd}
+                    addToWishlist={() => handleAddToWishlist(filteredProd)}
+                  />
+                </div>
+              ))}
+        </Slider>
+      </div>
 
-      {product && products && (
-  <div className="similarProductsByCategory">
-    <div className="product-list-similar">
-      {products
-        .filter((prod) => prod.category_name === product.category_name)
-        .slice(0, 5)
-        .map((filteredProd, index) => (
-          <div key={filteredProd.product_id} className="product-card">
-            <SimilarItems
-              product={filteredProd}
-              addToWishlist={() => handleAddToWishlist(filteredProd)}
-            />
-          </div>
-        ))}
-    </div>
-  </div>
-)}
+      {showFixedProductDetails && <FixedProductDetails product={product} />}
 
     </Layout>
   );
