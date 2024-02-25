@@ -13,9 +13,6 @@ body {
     display: flex;
 }
 
-
-
-
 .rightContainer {
     /* border: 2px solid red; */
     height: 100vh;
@@ -23,37 +20,114 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: bisque;
+    background-color: rgb(255, 255, 255);
 }
 
 .loginContainer {
-    border: 2px solid rgb(152, 157, 168);
-    height: 60vh;
+    /* border: 2px solid rgb(152, 157, 168); */
+    height: 90vh;
     width: 30vw;
     display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   border-radius: 20px;
-   box-shadow: -3px 4px 2px 2px black;
+   /* border-radius: 20px; */
+   /* box-shadow: -3px 4px 2px 2px black; */
+}
+
+
+.gbtn {
+    display: flex;
+}
+
+.upperSection {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25vw;
+}
+
+/* .tagline {
+    width: 10px;
+    border: 2px solid red;
+} */
+
+.upperSection h2 {
+    text-decoration: none;
+    color: rgb(233, 34, 8);
+    font-size: 35px;
+    font-weight: 400;
+    margin-bottom: -10px;
+}
+
+
+.placeholder.clicked {
+    position: relative;
+    width: 100px;
+    background-color: white;
+    top: 21px;
+    left: 8px;
+    
+}
+
+.placeholder {
+    position: relative;
+    width: 100px;
+    background-color: white;
+    top: 10px;
+    left: 8px;
+    transition: all 0.3s ease;
 }
 
 .in {
-    display: flex;
-    flex-direction: column;
+    width: 26.29vw;
+    height: 12vh;
+    /* border: 2px solid red; */
+    margin-bottom: -10px;
     color: black;
+    
+}
+
+.showMe {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.showMeAndForgot {
+    display: flex;
+    width: 26vw;
+    /* border: 2px solid red; */
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 15px;
+}
+
+.forgot {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: blue;
+}
+
+.mailIcon {
+    position: relative;
+    width: 30px;
+    top: 32px;
+    left: 350px;
 }
 
 .intag {
-    width: 20vw;
-    height: 5vh;
-    /* border: 2px solid blue; */
-    color: white;
-    font-weight: bolder;
-    border-radius: 50px;
-    box-shadow: -3px 4px 2px 2px black;
-    margin-bottom: 1rem;
-    color: black;
+    border: 2px solid black;
+    color: rgb(0, 0, 0);
+    width: 26.29vw;
+    height: 6.97vh;
+    margin-top: -28px;
+    border: 1px solid black;
+    border-radius: 4px;
 }
 
 .lb {
@@ -68,31 +142,45 @@ body {
 }
 
 .btn1 {
-    /* border: 2px solid pink; */
-    width: 20vw;
-    height: 5vh;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-    color: white;
-    font-weight: bolder;
-    border-radius: 50px;
-    background-color: rgb(94, 61, 4);
-    box-shadow: -3px 4px 2px 2px black;
-}
-
-.btn2 {
-    /* border: 2px solid rgb(234, 126, 144); */
-    width: 20vw;
-    height: 5vh;
-    border-radius: 50px;
-    color: white;
-    font-weight: bolder;
-    border-radius: 50px;
-    background-color: rgb(94, 61, 4);
-    box-shadow: -3px 4px 2px 2px black;
+    width: 26.29vw;
+    height: 6vh;
+    /* margin-bottom: 1rem; */
+    margin-top: 1rem;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fde8e8;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.btn2 {
+    width: 26.29vw;
+    height: 6vh;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 15px;
+}
+
+.signupEnd {
+    width: 20vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+}
+
+.signLink {
+    text-decoration: none;
+    color: blue;
 }
 
 .title{
@@ -104,7 +192,7 @@ body {
 
 
 .leftContainer {
-    background-color: bisque;
+    background-color:#fde8e8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,15 +203,14 @@ body {
 .imgWrapper {
     border: 2px solid rgb(58, 56, 56);
     border-radius: 15px;
-    overflow: hidden; /* Ensure the image stays within the container */
+    overflow: hidden;
     height: 80vh;
     width: 45vw;
     background-color: antiquewhite;
 }
 
 .imgContainer {
-    /* Adjust styles for the image if needed */
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Adjust how the image fits within the container */
+    object-fit: cover;
 }

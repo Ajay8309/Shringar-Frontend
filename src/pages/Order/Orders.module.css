@@ -1,0 +1,35 @@
+.tableWrapper {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .noOrdersMsg {
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  .emptyState {
+    text-align: center;
+    padding: 40px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .row {
+    transition: background-color 0.3s ease;
+  }
+  
+  .row:hover {
+    background-color: #f3f4f6;
+  }
+  
+  

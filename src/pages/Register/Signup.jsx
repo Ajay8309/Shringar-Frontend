@@ -8,13 +8,13 @@ import toast from 'react-hot-toast';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 
+import styles from './Signup.module.css'; // Import CSS module for Signup component
+
 const Signup = () => {
-    // console.log('Is this Working');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const { state } = useLocation();
     const { isLoggedIn, setUserState } = useUser();
-    // setUserState(false);
 
     const {
         register,
@@ -36,6 +36,7 @@ const Signup = () => {
                 email,
                 password,
                 fullname: name,
+                role: "customer",
             })
                 .then((data) => {
                     setError('');
@@ -59,15 +60,15 @@ const Signup = () => {
     }
 
     return (
-        <div className="MainContainer">
-            <form onSubmit={handleSubmit(onSubmit)} className="">
-                <h1 className="">Create Account</h1>
-                <div className="">
-                    <Label className="">
+        <div className={styles.MainContainer}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.SignupForm}>
+                <h1 className={styles.SignupTitle}>Create Account</h1>
+                <div className={styles.FormField}>
+                    <Label className={styles.FormLabel}>
                         <span>Username</span>
                     </Label>
                     <input
-                        className=""
+                        className={styles.FormInput}
                         type="text"
                         name="username"
                         {...register('username', {
@@ -80,17 +81,17 @@ const Signup = () => {
                     />
                 </div>
                 {errors.username && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {errors.username.message}
                     </HelpText>
                 )}
 
-                <div className="">
-                    <Label>
+                <div className={styles.FormField}>
+                    <Label className={styles.FormLabel}>
                         <span>Fullname</span>
                     </Label>
                     <input
-                        className=""
+                        className={styles.FormInput}
                         type="text"
                         name="name"
                         {...register('name', {
@@ -104,17 +105,17 @@ const Signup = () => {
                 </div>
 
                 {errors.name && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {errors.name.message}
                     </HelpText>
                 )}
 
-                <div className="">
-                    <Label>
+                <div className={styles.FormField}>
+                    <Label className={styles.FormLabel}>
                         <span>Email</span>
                     </Label>
                     <input
-                        className=""
+                        className={styles.FormInput}
                         type="email"
                         name="email"
                         {...register('email', {
@@ -128,17 +129,17 @@ const Signup = () => {
                 </div>
 
                 {errors.email && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {errors.email.message}
                     </HelpText>
                 )}
 
-                <div className="">
-                    <Label>
+                <div className={styles.FormField}>
+                    <Label className={styles.FormLabel}>
                         <span>Password</span>
                     </Label>
                     <input
-                        className=""
+                        className={styles.FormInput}
                         type="password"
                         name="password"
                         {...register('password', {
@@ -152,17 +153,17 @@ const Signup = () => {
                 </div>
 
                 {errors.password && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {errors.password.message}
                     </HelpText>
                 )}
 
-                <div className="">
-                    <Label>
+                <div className={styles.FormField}>
+                    <Label className={styles.FormLabel}>
                         <span>Confirm Password</span>
                     </Label>
                     <input
-                        className=""
+                        className={styles.FormInput}
                         type="password"
                         name="password2"
                         {...register('password2', {
@@ -174,12 +175,12 @@ const Signup = () => {
                 </div>
 
                 {errors.password2 && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {errors.password2.message}
                     </HelpText>
                 )}
 
-                <Button type="submit" className="">
+                <Button type="submit" className={styles.SubmitButton}>
                     {isLoading ? (
                         <PulseLoader color="blue" size={10} loading={isLoading} />
                     ) : (
@@ -187,13 +188,13 @@ const Signup = () => {
                     )}
                 </Button>
                 {error && (
-                    <HelpText className="" valid={false}>
+                    <HelpText className={styles.FormError} valid={false}>
                         {error}
                     </HelpText>
                 )}
-                <p className="">
+                <p className={styles.LoginLink}>
                     Have an Account?{' '}
-                    <Link to="/login" className="">
+                    <Link to="/login" className={styles.Link}>
                         Login
                     </Link>
                 </p>

@@ -320,7 +320,7 @@
   transition: max-height 0.3s ease-in-out;
 }
 
-.review-form.show {
+.show {
   max-height: 500px; 
 }
 

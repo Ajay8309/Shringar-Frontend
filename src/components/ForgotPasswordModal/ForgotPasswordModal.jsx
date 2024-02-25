@@ -58,20 +58,20 @@ const ForgotPasswordModal = () => {
         {isOpen && <Backdrop />}
         <span
           onClick={toggleModal}
-          className={styles.actionButton}
+          className="actionButton"
         >
           Forgot Password
         </span>
 
-        <Modal isOpen={isOpen} onClose={toggleModal}>
+        <Modal isOpen={isOpen} onClose={toggleModal} className='modal'>
           <form action="" onSubmit={handleSubmit(onSubmitReset)}>
             <ModalHeader>Forgot Password</ModalHeader>
             <ModalBody>
-              <Label style={styles.label}>
+              <Label className="label">
                 <span>Email</span>
                 <Input
                   name="email"
-                  style={styles.input}
+                  className="input"
                   valid
                   type="email"
                   inputMode="email"
@@ -97,7 +97,7 @@ const ForgotPasswordModal = () => {
               )}
 
               {msg && (
-                <HelperText style={styles.errorText}>{msg}</HelperText>
+                <HelperText className="errorText">{msg}</HelperText>
               )}
             </ModalBody>
 
@@ -105,7 +105,7 @@ const ForgotPasswordModal = () => {
               <Button
                 onClick={handleSubmit(onSubmitReset)}
                 disabled={isSending}
-                style={styles.actionButton}
+                className="actionButton"
               >
                 {isSending ? (
                   <PulseLoader size={10} color="#fff" />

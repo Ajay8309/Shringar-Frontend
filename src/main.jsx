@@ -9,11 +9,15 @@ import {WishlistProvider} from "./context/WishlistContext.jsx"
 import {ReviewProvider} from "./context/ReviewContext.jsx"
 import {HelmetProvider} from "react-helmet-async"
 import {FilterProvider} from "./context/FilterContext.jsx"
+import {OrderProvider} from "./context/OrderContext.jsx"
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
             <HelmetProvider>
-    <UserProvider>
+              <OrderProvider>
+             <UserProvider>
       <ProductProvider>
        <ReviewProvider>
         <CartProvider>
@@ -25,7 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </CartProvider>
        </ReviewProvider>
       </ProductProvider>
-    </UserProvider>
+             </UserProvider>
+              </OrderProvider>
             </HelmetProvider>
   </React.StrictMode>,
 )

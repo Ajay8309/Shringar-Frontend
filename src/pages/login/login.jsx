@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useGoogleLogin} from "@react-oauth/google";
 import {Button, HelperText, Input, Label} from "@windmill/react-ui"
 // forgot pasword modal
-// import ForgotPasswordModal from '../../components/ForgotPasswordModal/ForgotPasswordModal';
+import ForgotPasswordModal from '../../components/ForgotPasswordModal/ForgotPasswordModal';
 import { useUser } from "../../context/UserContext";
 import {useForm} from "react-hook-form";
 import { toast } from 'react-hot-toast';
@@ -13,12 +13,17 @@ import React from 'react';
 import { required } from 'react-admin';
 import '../login/login.css'
 import Bg from "../../assets/leftBg.jpg"
+import PasswordIcon from "../../assets/passwordIcon.png"
+import MailIcon from "../../assets/mailIcon.png"
+import Logoo from "../../assets/logoo.png"
 
 const Login = () => {
-    const { isLoggedIn, setUserState } = useUser();
+  const { isLoggedIn, setUserState } = useUser();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [emailClicked, setEmailClicked] = useState(false);
+  const [passwordClicked, setPasswordClicked] = useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const { state } = useLocation();
 
@@ -82,14 +87,27 @@ const Login = () => {
 
   console.log("Ajay");
 
+  
+
+
+  const handleEmailClick = () => {
+    // console.log("Email clicked");
+    setEmailClicked(!emailClicked);
+  };
+
+  const handlePasswordClick = () => {
+    setPasswordClicked(!passwordClicked);
+  };
+
+
+
+
   return (
     <div className="MainContainer">
       <div className="containerNav">
 
      <div className="leftContainer">
-        <div className="imgWrapper">
-         <img src={Bg} className='imgContainer' alt="" />
-        </div>
+       
      </div>
 
 
@@ -98,22 +116,32 @@ const Login = () => {
        
           
         <form onSubmit={handleSubmit(onSubmit)} className="loginContainer">
-        <h1 className="title">Login</h1>
+        <div className="upperSection">
+          <div className="logoo">
+            <img src={Logoo} alt="" />
+          </div>
+          <h2>SHRINGAR</h2>
+          <p className='tagline'>
+          Adorn your moments with brilliance
+          </p>
+        </div>
+
         <div className="in">
-          <Label className="lb">
-            <span>Email</span>
-          </Label>
+         <div className={`placeholder ${emailClicked ? 'clicked' : ''}`}>Email</div>
+         <div className="mailIcon"><img src={MailIcon} alt="" /></div>
           <input 
           className="intag"
+          onClick={handleEmailClick}
           type="email"
           name="email"
+          onBlur={() => handleBlur('email')}
           {
             ...register("email", {
               required:true,
               pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
             })
           }
-          placeholder="Enter a valid email"
+          placeholder=""
           />
         </div>
         {errors?.email && errors?.email.type === "required" && (
@@ -128,15 +156,16 @@ const Login = () => {
           )}
 
           <div className="in">
-            <Label className="lb">
-              <span>Password</span>
-            </Label>
+          <div className={`placeholder ${passwordClicked ? 'clicked' : ''}`}>Password</div>
+         <div className="mailIcon"><img src={PasswordIcon} alt="" /></div>
             <input
               className="intag"
+              onClick={handlePasswordClick}
               type="password"
               name="password"
+              onBlur={() => handleBlur('password')}
               {...register("password", { required: true })}
-              placeholder='Password'
+              placeholder=''
             />
           </div>
 
@@ -150,9 +179,17 @@ const Login = () => {
               {error}
             </HelperText>
           )}
-          {/* <div className="">
+
+          <div className="showMeAndForgot">
+            <div className="showMe">
+              <label>Show</label>
+              <input type="checkbox" name="" id="" />
+            </div>
+            <div className="forgot">
             <ForgotPasswordModal /> 
-          </div> */}
+            </div>
+          </div>
+         
           <Button type="submit" disabled={isLoading || isGoogleLoading} className='btn1'>
             {isLoading ? <PulseLoader color={"#0a138b"} size={10} loading /> : "Login"}
           </Button>
@@ -166,6 +203,8 @@ const Login = () => {
             disabled={isLoading || isGoogleLoading}
             className="btn2"
           >
+            <div className="gbtn">
+
             <svg
               className="googleImg"
               aria-hidden="true"
@@ -186,10 +225,11 @@ const Login = () => {
             ) : (
               "Login in with Google"
             )}
+            </div>
           </Button>
-          <p className="">
+          <p className="signupEnd">
             Don&apos;t have an account?{" "}
-            <Link to="/signup" className="">
+            <Link to="/signup" className="signLink">
               Sign Up
             </Link>
           </p>

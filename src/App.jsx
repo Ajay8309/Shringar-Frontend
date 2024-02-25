@@ -3,7 +3,8 @@ import { Suspense } from 'react'
 import Spinner from "./components/Spinner/Spinner";
 import {Toaster} from "react-hot-toast"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import {Login, Register, ProductList, ProductDetails, Cart, Wishlist, Profile, Checkout} from './pages'
+import {Login, Signup, ProductList, ProductDetails, Cart, 
+  Wishlist, Profile, Checkout, Order, OrderDetails} from './pages'
 import Layout from './layout/layout';
 import ProtectedRoute from "./routes/protected.route"
 
@@ -23,7 +24,7 @@ const App = () => {
     <Routes>
 
       {/* <ProtectedRoute> */}
-      <Route path="/signup" element = {<Register/>}/>
+      <Route path="/signup" element = {<Signup/>}/>
       <Route path="/login" element = {<Login/>}/>
       {/* </ProtectedRoute> */}
       <Route index element={<ProductList />} />
@@ -32,6 +33,10 @@ const App = () => {
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/profile" element = {<Profile/>}/>
       <Route path="/checkout" element={<Checkout/>}/>
+      <Route path="/order" element={<Order/>}/>
+      <Route path="/order/:id" element={<OrderDetails/>}/>
+
+
     </Routes>
     </BrowserRouter>
   )

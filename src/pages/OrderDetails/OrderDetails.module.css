@@ -1,0 +1,58 @@
+
+.title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    margin-bottom: 0.5rem;
+  }
+  
+  .badge {
+    margin-right: 0.5rem;
+  }
+  
+  .amount {
+    font-weight: bold;
+  }
+  
+  .cardWrapper {
+    border-top: 2px solid #e5e7eb;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    display: flex;
+    margin: 1rem 0;
+    padding: 0.5rem;
+  }
+  
+  .cardImage {
+    width: 100%;
+    max-width: 300px;
+    object-fit: contain;
+  }
+  
+  .cardBody {
+    flex: 1;
+    padding-left: 1rem;
+  }
+  
+  .itemName {
+    font-weight: 600;
+    color: #4b5563;
+  }
+  
+  .itemPrice {
+    margin-bottom: 0.5rem;
+  }
+  
+  .itemDescription {
+    color: #4b5563;
+  }
+  
+  .itemQuantity {
+    margin-top: 0.5rem;
+  }
+  

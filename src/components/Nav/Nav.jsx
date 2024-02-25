@@ -157,7 +157,7 @@ const Nav = () => {
                   </Link>
                 </div>
                 <div className='orders'>
-                  <Link to="/orders" className='underline'>
+                  <Link to="/order" className='underline'>
                     Orders
                   </Link>
                 </div>

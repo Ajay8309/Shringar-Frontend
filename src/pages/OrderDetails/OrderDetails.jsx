@@ -1,10 +1,10 @@
 import { Badge, Card, CardBody } from "@windmill/react-ui";
 import { format, parseISO } from "date-fns";
-// import { formatCurrency } from "helpers/formatCurrency";
 import Layout from "../../layout/layout";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import orderService from "../../services/order.service";
+import styles from "./OrderDetails.module.css";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -25,30 +25,30 @@ const OrderDetails = () => {
   return (
     <Layout>
       <div className="my-4">
-        <h1 className="font-bold text-2xl">Order Details</h1>
-        <p>Order no: #{state.order.order_id}</p>
+        <h1 className={styles.title}>Order Details</h1>
+        <p className={styles.subtitle}>Order no: #{state.order.order_id}</p>
         <p>{`${state.order.total || "Not available"} items`}</p>
         <p>
-          Status: <Badge type="success">{state.order.status}</Badge>
+          Status: <Badge type="success" className={styles.badge}>{state.order.status}</Badge>
         </p>
-        <p>Total Amount: {formattedPrice(state.order.amount)}</p>
+        <p className={styles.amount}>Total Amount: {formattedPrice(state.order.amount)}</p>
         <p>Placed on: {format(parseISO(state.order.date), "d MMM, yyyy")}</p>
-        <div className="border-t-2">
-          <h1 className="font-bold text-xl">Items in your order</h1>
+        <div className={styles.cardWrapper}>
+          <h1 className={styles.title}>Items in your order</h1>
           {items?.map((item) => (
-            <Card key={item.product_id} className="flex my-4 p-2 md:flex-row flex-col">
+            <Card key={item.product_id} className={styles.card}>
               <img
-                className="sm:w-full md:w-1/2 lg:w-1/3 object-contain md:object-cover"
+                className={styles.cardImage}
                 loading="lazy"
                 decoding="async"
                 src={item.image_url}
                 alt={item.name}
               />
-              <CardBody>
-                <h1 className="font-semibold text-gray-600">{item.name}</h1>
-                <p className="mb-2">{formattedPrice(item.price)}</p>
-                <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
-                <p className="mt-2">Quantity: {item.quantity}</p>
+              <CardBody className={styles.cardBody}>
+                <h1 className={styles.itemName}>{item.name}</h1>
+                <p className={styles.itemPrice}>{formattedPrice(item.price)}</p>
+                <p className={styles.itemDescription}>{item.description}</p>
+                <p className={styles.itemQuantity}>Quantity: {item.quantity}</p>
               </CardBody>
             </Card>
           ))}
