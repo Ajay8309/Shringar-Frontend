@@ -17,18 +17,19 @@ const Checkout = () => {
       return navigate("/cart");
     }
 
-    if (cartData.items.length === 0) {
+    if (!cartData || !cartData.items || cartData.items.length === 0) {
       return navigate("/cart");
     }
   }, [cartData, navigate, state]);
 
-  const nextStep = () => setActiveStep((prevStep) => setActiveStep(prevStep + 1));
-  const previousStep = () => setActiveStep((prevStep) => setActiveStep(prevStep - 1));
+  const nextStep = () => setActiveStep((prevStep) => prevStep + 1);
+  const previousStep = () => setActiveStep((prevStep) => prevStep - 1);
 
   const next = (data) => {
     setAddressData(data);
     nextStep();
   };
+
   return (
     <Layout>
       <div className="">

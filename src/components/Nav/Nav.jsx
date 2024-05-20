@@ -4,7 +4,7 @@ import {useCart} from "../../context/CartContext"
 import {useUser} from "../../context/UserContext"
 import {useWishlist} from "../../context/WishlistContext"
 import {LogOut, ShoppingCart, User, Heart} from "react-feather"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Nav.css'
 import { FaSearch} from 'react-icons/fa';
 import Spinner from '../Spinner/Spinner';
@@ -24,11 +24,18 @@ const Nav = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isThirdNavFixed, setIsThirdNavFixed] = useState(false);
   const [isFilterWindowOpen, setIsFilterWindowOpen] = useState(false); 
+  const [activeLink, setActiveLink] = useState(null);
+  const [page, setPagec] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
+
+  const navigate = useNavigate();
+
+
+
 
   
 
-  const {setPage, updateFilters, getProductsByName, getProductByCategory,
-     getProductsByMaterial} = useProduct();
+  const {setPage, updateFilters, getProductsByName, getProductByCategory, getProductByMaterial} = useProduct();
 
 
   const handleScroll = () => {
@@ -58,11 +65,39 @@ const Nav = () => {
   };
 
   const handleSearch = () => {
-    updateFilters({});
+    // updateFilters({});
     setPage(1);
+    console.log(searchQuery);
     getProductsByName(searchQuery);
   };
+
+  const handleMaterial = (name) => {
+    setPage(1);
+    console.log("Inside handleMaterial")
+    updateFilters({materialType:"gold"});
+    setActiveLink(name);
+    setPagec(name);
+  }
+
+  const handleCategory = (name) => {
+    console.log("category hu mai tum kyaa ho");
+    setPage(1);
+    updateFilters({categoryName:name});
+    // getProductByCategory(name);
+    setActiveLink(name);
+    setPagec(name);
+  }
   
+
+  const handleMouseEnter = () => {
+    setShowMenu(true);
+    console.log("inside menu");
+  };
+
+  const handleMouseLeave = () => {
+    setShowMenu(false);
+    console.log("ouside");
+  };
 
 
   return (
@@ -136,18 +171,17 @@ const Nav = () => {
               </button>
             </Link>
            </li>
+
            <li className='AccountLink'>
-            <button
-              className='AccountBtn'
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              // onMouseOver={() => setIsDropdownOpen(true)}
-            >
-              <span className='AccountText'>Account</span>
-              <User className='userImg'/>
-            </button>
-            {isDropdownOpen && (
-              <div className='AccountBox'>
-                <div className="name">
+    <button
+        className='AccountBtn'
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+    >
+        <span className='AccountText'>Account</span>
+        <User className='userImg'/>
+    </button>
+    <div className={`AccountBox ${isDropdownOpen ? 'open' : ''}`}>
+    <div className="name">
                   <p>{userData?.fullname?.split(" ").join(" ")}</p>
                   <p>@{userData?.username}</p>
                 </div>
@@ -166,28 +200,99 @@ const Nav = () => {
                     Logout
                   </Link>
                 </div>
-              </div>
-            )}
+    </div>
+   </li>
+
             
-           </li>
           </>
         )}
       </ul>
        </div>
 
        <div className="lowerNav ">
-        <ul className="lowerNavLinks">
-          <li className="link" >All Jewellery</li>
-          <li className="link" onClick={() => {getProductsByMaterial('gold')}}>Gold</li>
-          <li className="link" onClick={() => {getProductByCategory('Rings')}}>Rings</li>
-          <li className="link">Braclet</li>
-        </ul>
+       <ul className="lowerNavLinks">
+        {/* <Link to="/products"> */}
+       <li
+        className="link"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        // onClick={navigate('/products')}
+        >
+        All Jewellery
+        {showMenu && (
+          <div className="menu">
+            <div className="menuContainer">
+            <ul>
+              <li><h2 className='MenuTitle1'>Categories</h2></li>
+              <li>Rings</li>
+              <li>Bracelets</li>
+              <li>Necklaces</li>
+              <li>Pendants</li>
+              <li>Finger Rings</li>
+              <li>Mangalsutra</li>
+              <li>Chains</li>
+              <li>Jhumkaas</li>             
+            </ul>
+         
+            <ul>
+            <li><h2 className='MenuTitle1'>Gold Coins</h2></li>
+              <li>1 gram</li>
+              <li>2 gram</li>
+              <li>3 gram</li>
+              <li>4 gram</li>
+              <li>5 gram</li>
+              <li>8 gram</li>
+              <li>10 gram</li>
+              <li>25 gram</li>
+              <li>30 gram</li>
+              <li>50 gram</li>
+              <li>100 gram</li>
+            </ul>
+
+            <ul>
+              <li><h2 className='MenuTitle1'>Price</h2></li>
+              <li> &lt; 25K</li>
+              <li>25K - 50K</li>
+              <li>50K - 1L</li>
+              <li>1L and Above</li>         
+            </ul>
+
+            <ul>
+              <li><h2 className='MenuTitle1'>Metal</h2></li>
+              <li>Gold</li>
+              <li>Silver</li>           
+            </ul>
+            </div>
+          </div>
+        )}
+      </li>
+        {/* </Link> */}
+      <Link to="/products" className='directLinks'>
+      <li className={`link ${activeLink === 'gold' ? 'active' : ''}`} onClick={() => handleMaterial('gold')}>Gold</li>
+      </Link>
+      <Link to="/products" className='directLinks'>
+      <li className={`link ${activeLink === 'Rings' ? 'active' : ''}`} onClick={() => handleCategory('Rings')}>Rings</li>
+      </Link>
+      <Link to="/products" className='directLinks'>
+      <li className={`link ${activeLink === 'Bracelets' ? 'active' : ''}`} onClick={() => handleCategory('Bracelets')}>Bracelets</li>
+      </Link>
+      <Link to="/products" className='directLinks'>
+      <li className={`link ${activeLink === 'Necklaces' ? 'active' : ''}`} onClick={() => handleCategory('Necklaces')}>Necklaces</li>
+      </Link>
+    </ul>
        </div>
 
+       {page == '' ? (
        <div className={`thirNav`}>
          <p>Home | All Jewellery</p> 
           <p>Gold Festival</p>
       </div>
+       ) : (
+        <div className={`thirNav`}>
+        <p>Home | {page}</p> 
+         <p>Gold Festival</p>
+        </div>
+       )}
 
       <div className={`fourthNav ${isThirdNavFixed ? 'fixed' : ''}`}>
         <Filter size={27} className='filterIcon' onClick={toggleFilterWindow} />

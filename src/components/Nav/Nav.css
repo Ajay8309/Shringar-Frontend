@@ -3,6 +3,15 @@ h1{
     font-weight: 400;
 }
 
+Link {
+    text-decoration: none;
+}
+
+.directLinks {
+    text-decoration: none;
+    color: black;
+}
+
 
 .upperNav {
     height: 10vh;
@@ -20,7 +29,7 @@ h1{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 32vh;
+    height: 34vh;
 }
 
 .lowerNav{
@@ -31,7 +40,7 @@ h1{
 
 .thirNav {
     /* border: 2px solid red; */
-    height: 9vh;
+    height: 7vh;
     background-color: #fde8e8;
     display: flex;
     justify-content: space-between;
@@ -197,19 +206,33 @@ ul {
 }
 
 .AccountBox {
-  position: absolute;
-  top: 100%;
-  z-index: 1;
-  left: -128px;
-  background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ddd;
-  padding: 10px;
-  /* opacity: 0; */
-  /* visibility: hidden; */
-  transition: opacity 0.3s, visibility 0.3s;
-  
+    position: absolute;
+    top: calc(173% + 10px);
+    left: 71px;
+    z-index: 14;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    transition: left 0.3s ease;
+    max-width: 300px;
+    margin: auto;
 }
+
+.AccountBox.open {
+    opacity: 1; /* Set opacity to 1 when open */
+    visibility: visible; /* Set visibility to visible when open */
+    left: -164px;
+}
+
+
+
 
 .AccountLink {
     /* margin-right: 4rem; */
@@ -254,9 +277,56 @@ ul {
 .lowerNavLinks {
     display: flex;
     justify-content: space-between;
-    width: 30vw;
+    width: 43vw;
 }
 
+
+.lowerNavLinks .link:hover,
+.lowerNavLinks .link.active {
+  border-bottom: 2px solid black;
+}
+
+.menu {
+    position: absolute;
+    /* top: 100%; */
+    /* left: 0; */
+    background-color: rgb(255, 255, 255);
+    /* border: 1px solid black; */
+    padding: 5px;
+    height: 26vw;
+    width: 97vh;
+    z-index: 100;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+
+  .menuContainer {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* border: 2px solid red; */
+  }
+ 
+
+  .MenuTitle1 {
+    color: red;
+    font-weight: 100;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: -4px 41px;
+  }
+  
+  .menu ul li {
+    cursor: pointer;
+  }
+  
+  .menu ul li:hover {
+    color: red; /* Change color on hover */
+  }
 /* .filterWindow {
     border: 2px solid red;
     height: 25vh;
@@ -336,16 +406,7 @@ ul {
   
   /* Add this CSS to your stylesheets */
 
-.AccountBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    max-width: 300px; /* Adjust the maximum width as needed */
-    margin: auto;
-  }
+
   
   .name {
     text-align: center;

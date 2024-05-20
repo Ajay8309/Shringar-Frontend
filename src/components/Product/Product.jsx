@@ -29,7 +29,7 @@ const Product = ({ product, addToWishlist }) => {
             <button className="wishlist" onClick={toggleFavorite}>
             <FontAwesomeIcon icon={faHeart} style={{ color: isFavorite ? "red" : "gray" }} />
             </button>
-            <Link to={`products/${product.product_id}`} className="underline">
+            <Link to={`/products/${product.product_id}`} className="underline">
                 <img
                     className="productImg"
                     src={product.image_url}

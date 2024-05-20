@@ -36,47 +36,51 @@ const Orders = () => {
   if (orders?.length === 0) {
     return (
       <Layout loading={orders === null}>
-        <h1 className={styles.title}>Orders</h1>
-        <p className={styles.noOrdersMsg}>You are yet to place an order</p>
+        <div className={styles.emptyState}>
+          <h1 className={styles.title}>Orders</h1>
+          <p className={styles.noOrdersMsg}>You haven't placed any orders yet.</p>
+        </div>
       </Layout>
     );
   }
 
   return (
     <Layout title="Orders" loading={orders === null}>
-      <h1 className={styles.title}>Orders</h1>
-      <TableContainer className={styles.tableContainer}>
-        <Table className={styles.table}>
-          <TableHeader>
-            <TableRow>
-              <TableCell className={styles.cell}>ID</TableCell>
-              <TableCell className={styles.cell}>No. of items</TableCell>
-              <TableCell className={styles.cell}>Status</TableCell>
-              <TableCell className={styles.cell}>Amount</TableCell>
-              <TableCell className={styles.cell}>Date</TableCell>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {orders?.items.map((order) => (
-              <TableRow
-                className={`${styles.row} cursor-pointer`}
-                onClick={() => goToDetails(order)}
-                key={order.order_id}
-              >
-                <OrderItem order={order} />
+      <div className={styles.tableWrapper}>
+        <h1 className={styles.title}>Orders</h1>
+        <TableContainer>
+          <Table className={styles.table}>
+            <TableHeader>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>No. of Items</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Date</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TableFooter>
-        <Pagination
-          totalResults={orders?.total}
-          resultsPerPage={5}
-          onChange={handlePage}
-          label="Table navigation"
-        />
-      </TableFooter>
+            </TableHeader>
+            <TableBody>
+              {orders?.items.map((order) => (
+                <TableRow
+                  className={`${styles.row} cursor-pointer`}
+                  onClick={() => goToDetails(order)}
+                  key={order.order_id}
+                >
+                  <OrderItem order={order} />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TableFooter>
+          <Pagination
+            totalResults={orders?.total}
+            resultsPerPage={5}
+            onChange={handlePage}
+            label="Table navigation"
+          />
+        </TableFooter>
+      </div>
     </Layout>
   );
 };

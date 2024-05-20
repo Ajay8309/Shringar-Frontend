@@ -1,14 +1,15 @@
-import localCart from "../helpers/localStorageCart";
-import LocalWishlist from "../helpers/localStorageWishlist"
-import {createContext, useContext, useEffect, useState} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import cartService from "../services/cart.service";
 import wishlistService from "../services/wishlist.service";
-import {useUser} from "./UserContext";
+import localCart from "../helpers/localStorageCart";
+import LocalWishlist from "../helpers/localStorageWishlist";
+import { useUser } from "./UserContext";
+import { toast } from 'react-hot-toast';
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-    const [cartData, setCartData] = useState([]);
+    const [cartData, setCartData] = useState({ items: [] });
     const [cartSubTotal, setCartSubTotal] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
     const { isLoggedIn } = useUser();
@@ -32,71 +33,69 @@ const CartProvider = ({ children }) => {
         } else {
             const items = localCart.getItems();
             if (items == null) {
+                setIsLoading(false);
                 return;
             }
-
-            setCartData(items);
+            setCartData({ items });
             setIsLoading(false);
         }
     }, [isLoggedIn]);
 
     useEffect(() => {
-        const quantity = cartData?.items?.reduce((acc, cur) => acc + Number(cur.quantity), 0) || 0;
-        const TotalAmt = cartData?.items?.reduce((acc, cur) => acc + Number(cur.subtotal), 0) || 0;
-        // console.log(TotalAmt);
-        setCartSubTotal(TotalAmt);
-        setCartTotal(quantity);
+        const updateCartTotals = () => {
+            const subtotal = cartData.items.reduce((acc, cur) => acc + (cur.subtotal || 0), 0);
+            const totalQuantity = cartData.items.reduce((acc, cur) => acc + (cur.quantity || 0), 0);
+            setCartSubTotal(subtotal);
+            setCartTotal(totalQuantity);
+        };
+        updateCartTotals();
+        toast.success("Cart Updated");
     }, [cartData]);
 
-    
-
     const addItem = async (product, quantity) => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             try {
-                const {data} = await cartService.addToCart(product.product_id, quantity);
-                setCartData({items : [...data.data]});
+                const { data } = await cartService.addToCart(product.product_id, quantity);
+                setCartData({ items: data.data });
             } catch (error) {
+                console.error(error);
                 return error;
             }
-        }else {
-            localCart.addItem(product, 1);
-            setCartData({...cartData, items: localCart.getItems() });
+        } else {
+            localCart.addItem(product, quantity);
+            setCartData({ items: localCart.getItems() });
         }
     };
 
     const deleteItem = (product_id) => {
-        if(isLoggedIn) {
-            const {items} = cartData;
+        if (isLoggedIn) {
             cartService.removeFromCart(product_id).then(() => {
-                const data = items.filter((item) => item.product_id !== product_id);
-                setCartData({...cartData, items:data});
-            })
+                const updatedItems = cartData.items.filter(item => item.product_id !== product_id);
+                setCartData({ items: updatedItems });
+            });
         } else {
             localCart.removeItem(product_id);
-            setCartData({...cartData, items : localCart.getItems()});
+            setCartData({ items: localCart.getItems() });
         }
     };
 
     const increment = async (product_id) => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             const res = await cartService.increment(product_id);
-            setCartData({...cartData, items : res.data});
-            return res;
+            setCartData({ items: res.data });
         } else {
             localCart.incrementQuantity(product_id);
-            setCartData({...cartData, items: localCart.getItems()});
+            setCartData({ items: localCart.getItems() });
         }
     };
-    
 
     const decrement = async (product_id) => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             const res = await cartService.decrement(product_id);
-            setCartData({...cartData, items : res.data});
-            return res;
+            setCartData({ items: res.data });
         } else {
             localCart.decrementQuantity(product_id);
-            setCartData({...cartData, items: localCart.getItems()});
+            setCartData({ items: localCart.getItems() });
         }
     };
 
@@ -104,19 +103,19 @@ const CartProvider = ({ children }) => {
         try {
             if (isLoggedIn) {
                 await cartService.removeFromCart(product_id);
-                const updatedCart = cartData?.items.filter(item => item.product_id !== product_id);
+                const updatedCart = cartData.items.filter(item => item.product_id !== product_id);
                 setCartData({ items: updatedCart });
             } else {
                 localCart.removeItem(product_id);
-                setCartData({ ...cartData, items: localCart.getItems() });
+                setCartData({ items: localCart.getItems() });
             }
 
             if (isLoggedIn) {
                 const { data } = await wishlistService.addToWishlist(product_id);
-                setWishlistData({ items: [...data.data] });
+                setWishlistData({ items: data.data });
             } else {
                 LocalWishlist.addItem(product_id);
-                setWishlistData({ ...wishlistData, items: LocalWishlist.getItems() });
+                setWishlistData({ items: LocalWishlist.getItems() });
             }
         } catch (error) {
             console.error("Error moving item to wishlist:", error);
@@ -135,7 +134,7 @@ const CartProvider = ({ children }) => {
                 decrement,
                 cartTotal,
                 cartSubTotal,
-                moveCartItemToWishlist
+                moveCartItemToWishlist,
             }}
         >
             {children}
@@ -145,7 +144,6 @@ const CartProvider = ({ children }) => {
 
 const useCart = () => {
     const context = useContext(CartContext);
-
     if (context === undefined) {
         throw new Error("useCart must be used within CartProvider");
     }

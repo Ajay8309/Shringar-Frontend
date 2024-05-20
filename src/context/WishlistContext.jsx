@@ -4,6 +4,7 @@ import wishlistService from "../services/wishlist.service";
 import {useUser} from "./UserContext";
 import cartService from "../services/cart.service";
 import { useCart } from "./CartContext";
+import { toast } from 'react-hot-toast';
 import localCart from "../helpers/localStorageCart";
 
 const WishlistContext = createContext();
@@ -46,6 +47,7 @@ const WishlistProvider = ({children}) => {
     useEffect(() => {
         const quantity = wishlistData?.items?.reduce((acc, cur) => acc + Number(cur.quant), 0) || 0;
         setWishlistTotal(prevTotal => quantity);
+        toast.success("Wishlist Updated");
         setIsLoading(false);
     }, [wishlistData]);
     

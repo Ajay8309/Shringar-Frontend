@@ -22,9 +22,11 @@ const OrderDetails = () => {
     }).format(amount);
   };
 
+  // console.log(items.length);
+
   return (
     <Layout>
-      <div className="my-4">
+      <div className={styles.container}>
         <h1 className={styles.title}>Order Details</h1>
         <p className={styles.subtitle}>Order no: #{state.order.order_id}</p>
         <p>{`${state.order.total || "Not available"} items`}</p>
@@ -34,7 +36,11 @@ const OrderDetails = () => {
         <p className={styles.amount}>Total Amount: {formattedPrice(state.order.amount)}</p>
         <p>Placed on: {format(parseISO(state.order.date), "d MMM, yyyy")}</p>
         <div className={styles.cardWrapper}>
-          <h1 className={styles.title}>Items in your order</h1>
+
+        {items && items.length > 0 && (
+           <h1 className={styles.title}>Items in your order</h1>
+         )}
+
           {items?.map((item) => (
             <Card key={item.product_id} className={styles.card}>
               <img
@@ -52,6 +58,7 @@ const OrderDetails = () => {
               </CardBody>
             </Card>
           ))}
+
         </div>
       </div>
     </Layout>

@@ -28,7 +28,7 @@ const UserProvider = ({ children }) => {
                 setIsLoggedIn(true);
             } catch (error) {
                 // Handle JSON parsing error
-                console.error("Error parsing token:", error);
+                // console.error("Error parsing token:", error);
                 localStorage.removeItem("token");
             }
         }

@@ -92,30 +92,34 @@ const ProductDetails = () => {
 
   const CustomPrevArrow = (props) => {
     const { className, onClick } = props;
-    return <div className={className} onClick={onClick}><FontAwesomeIcon icon={faArrowLeft} /></div>;
+    return <div className="prevArrow" onClick={onClick}><FontAwesomeIcon icon={faArrowLeft} /></div>;
   };
   
   const CustomNextArrow = (props) => {
     const { className, onClick } = props;
-    return <div className={className} onClick={onClick}><FontAwesomeIcon icon={faArrowRight} /></div>;
+    return <div className=" nextArrow" onClick={onClick}><FontAwesomeIcon icon={faArrowRight} /></div>;
   };
   
 
+  const numSimilarProducts = products ? products.filter(prod => prod.category_name === (product && product.category_name)).length : 0;
+  console.log(numSimilarProducts);
+  const maxSlidesToShow = Math.min(numSimilarProducts, 5);
+  const minSlidesToShow = Math.max(numSimilarProducts, 1);
   
-
+  
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5, 
-    slidesToScroll: 1, 
-    prevArrow: <CustomPrevArrow />, 
-    nextArrow: <CustomNextArrow />, 
+    slidesToShow: maxSlidesToShow,
+    slidesToScroll: 1,
+    prevArrow: <CustomPrevArrow className="prevArrow" />,
+    nextArrow: <CustomNextArrow className="nextArrow" />,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: minSlidesToShow >= 2 ? 2 : minSlidesToShow,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -124,13 +128,13 @@ const ProductDetails = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: minSlidesToShow,
           slidesToScroll: 1,
         },
       },
     ],
   };
-
+  
   
   useEffect(() => {
     const handleScroll = () => {
@@ -212,7 +216,8 @@ const ProductDetails = () => {
 
                {isVirtualTryOnVisible && (
             <VirtualTryOn
-            Product={product.image_url}
+              image={product.image_url}
+              category = {product.category_name}
               onClose={() => setIsVirtualTryOnVisible(false)}
             />
           )}
@@ -321,25 +326,27 @@ const ProductDetails = () => {
 
       
       <div className="similarProductsByCategory">
-        <h1>You May Also Like</h1>
-        <Slider {...settings}> 
-          {product &&
-            products &&
-            products
-              .filter((prod) => prod.category_name === product.category_name)
-              .slice(0, 5)
-              .map((filteredProd, index) => (
-                <div key={filteredProd.product_id} className="product-card">
-                  <SimilarItems
-                    product={filteredProd}
-                    addToWishlist={() => handleAddToWishlist(filteredProd)}
-                  />
-                </div>
-              ))}
-        </Slider>
-      </div>
+  <h1>You May Also Like</h1>
+  {product && (
+    <Slider {...settings}> 
+      {products &&
+        products
+          .filter((prod) => prod.category_name === product.category_name)
+          .slice(0, 5)
+          .map((filteredProd, index) => (
+            <div key={filteredProd.product_id} className="product-card">
+              <SimilarItems
+                product={filteredProd}
+                addToWishlist={() => handleAddToWishlist(filteredProd)}
+              />
+            </div>
+          ))}
+    </Slider>
+  )}
+</div>
 
-      {showFixedProductDetails && <FixedProductDetails product={product} />}
+
+      {/* {showFixedProductDetails && <FixedProductDetails product={product} />} */}
 
     </Layout>
   );

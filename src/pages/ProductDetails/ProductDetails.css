@@ -11,6 +11,14 @@
   min-height: 100vh;
 }
 
+.similarProductsByCategory {
+  /* border: 2px solid red; */
+}
+
+.prevArrow, .nextArrow {
+  /* border: 2px solid red; */
+}
+
   
   .product-details-image img {
     max-width: 350px;

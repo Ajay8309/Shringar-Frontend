@@ -42,6 +42,8 @@ const Cart = () => {
       </Layout>
     );
   }
+
+  // console.log(cartSubTotal);
   
 
   return (

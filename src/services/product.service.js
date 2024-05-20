@@ -11,10 +11,11 @@ class ProductService {
     }
 
     getProductByName(name) {
-        return API.get(`/products/${name}`);
+        console.log("in front productname service ");
+        return API.get(`/products/name/${name}`);
     }
 
-    getProductsBycategory(category) {
+    getProductsByCategory(category) {
          return API.get(`/products/category/${category}`);
     }
 

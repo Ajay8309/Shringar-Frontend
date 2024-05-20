@@ -27,11 +27,11 @@ const Login = () => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const { state } = useLocation();
 
-  // const login = useGoogleLogin({
-  //   onSuccess: (codeResponse) => handleGoogleLogin(codeResponse),
-  //   onError: (error) => console.log("Login Failed:", error),
-  //   flow: "auth-code",
-  // });
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => handleGoogleLogin(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+    flow: "auth-code",
+  });
 
   const {
     register,
@@ -44,19 +44,19 @@ const Login = () => {
     },
   });
 
-  // async function handleGoogleLogin(googleData) {
-  //   try {
-  //     const data = await authService.googleLogin(googleData.code);
-  //     toast.success("Login successful 🔓");
+  async function handleGoogleLogin(googleData) {
+    try {
+      const data = await authService.googleLogin(googleData.code);
+      toast.success("Login successful 🔓");
 
-  //     setUserState(data);
-  //     setRedirectToReferrer(true);
-  //     setIsGoogleLoading(false);
-  //   } catch (error) {
-  //     setIsGoogleLoading(false);
-  //     toast.error("Could not login with Google 😢");
-  //   }
-  // }
+      setUserState(data);
+      setRedirectToReferrer(true);
+      setIsGoogleLoading(false);
+    } catch (error) {
+      setIsGoogleLoading(false);
+      toast.error("Could not login with Google 😢");
+    }
+  }
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -85,7 +85,7 @@ const Login = () => {
     return <Navigate to={state?.from || "/"} />;
   }
 
-  console.log("Ajay");
+  // console.log("Ajay");
 
   
 
