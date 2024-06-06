@@ -85,7 +85,7 @@ const Orders = () => {
           </button>
           <div className={styles.pageInfo}>
             <p className={styles.currentPage}>page</p>
-          </div>
+          </div> 
           <button className={styles.nextPageButton}>
             <img src={Arrowright} className={styles.ArrowR} alt="" />
           </button>

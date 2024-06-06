@@ -19,11 +19,10 @@ import styles from "./Orders.module.css"; // Import your CSS module
 const Orders = () => {
   const { orders, setOrders } = useOrders();
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // New state for total pages
   const navigate = useNavigate();
 
-  const handlePage = (page) => {
-    setCurrentPage(page);
+  const handlePage = (num) => {
+    setCurrentPage(num);
   };
 
   const goToDetails = (order) => {
@@ -31,15 +30,12 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    orderService.getAll(currentPage).then((res) => {
-      setOrders(res.data.orders);
-      setTotalPages(Math.ceil(res.data.total / 5)); // Assuming 5 orders per page
-    });
+    orderService.getAllOrders(currentPage).then((res) => setOrders(res.data));
   }, [currentPage, setOrders]);
 
-  if (!orders || orders.length === 0) {
+  if (orders?.length === 0) {
     return (
-      <Layout loading={!orders}>
+      <Layout loading={orders === null}>
         <div className={styles.emptyState}>
           <h1 className={styles.title}>Orders</h1>
           <p className={styles.noOrdersMsg}>You haven't placed any orders yet.</p>
@@ -49,7 +45,7 @@ const Orders = () => {
   }
 
   return (
-    <Layout title="Orders" loading={!orders}>
+    <Layout title="Orders" loading={orders === null}>
       <div className={styles.tableWrapper}>
         <h1 className={styles.title}>Orders</h1>
         <TableContainer>
@@ -64,7 +60,7 @@ const Orders = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {orders.map((order) => (
+              {orders?.items.map((order) => (
                 <TableRow
                   className={`${styles.row} cursor-pointer`}
                   onClick={() => goToDetails(order)}
@@ -78,8 +74,8 @@ const Orders = () => {
         </TableContainer>
         <TableFooter>
           <Pagination
-            totalResults={totalPages} // Use totalPages instead of orders.total
-            resultsPerPage={1} // Change to 1 or appropriate value
+            totalResults={orders?.total}
+            resultsPerPage={5}
             onChange={handlePage}
             label="Table navigation"
           />
