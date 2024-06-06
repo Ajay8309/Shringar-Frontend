@@ -34,8 +34,10 @@ Link {
 
 .lowerNav{
     height: 8vh;
+    position: relative;
     margin-top: 80px;
     /* border: 2px solid red; */
+    margin-top: 11.4vh;
 }
 
 .thirNav {
@@ -431,28 +433,45 @@ ul {
   /* Add more styling as needed */
   
 
-@media screen and (max-width: 886px) {
+
+@media screen and (max-width: 1120px)  {
+
+
+    .fixed {
+        position: fixed;
+        top: 193px;
+        width: 99.8vw;
+        z-index: 1;
+    
+    }
     .upperNav {
         display: flex;
         flex-direction: column;
         height: 25vh;
+        padding: 10px;
         justify-content: center;
         align-items: center;
     }
 
     .links {
         /* border: 2px solid red; */
-        margin-top: -3px;
+        /* margin-top: -3px; */
         width: 35vw;
+        margin-left: -43px;
+        /* order: 2; */
     }
 
     .searchBox {
         /* border: 2px solid red; */
         margin-top: -12px;
+        /* order: 3; */
     }
 
     .Logo {
-        margin-top: -26px;
+        margin-top: 16px;
+        margin: auto;
+        /* order: 1; */
+        /* border: 2px solid red; */
     }
 
     .searchBtn {
@@ -462,5 +481,9 @@ ul {
         position: relative;
         left: -44px;
         top: -12px;
+    }
+
+    .lowerNav {
+        display: none;
     }
  }

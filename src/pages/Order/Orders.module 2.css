@@ -1,0 +1,93 @@
+.tableWrapper {
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.table {
+  border-collapse: collapse; /* Ensures borders don't overlap */
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+}
+
+.table thead th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.row:hover {
+  background-color: #eee;
+}
+
+.emptyState {
+  text-align: center;
+}
+
+.noOrdersMsg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 1rem;
+}
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+ 
+.pagination{
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 2rem; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  justify-content: center;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  /* border: 2px solid red; */
+  letter-spacing: -0.01em;
+  margin-bottom: 3rem;
+  /* color: #7C7871; */
+  /* border: 2px solid red; */
+}
+
+
+
+.pagination button{
+  /* background: none; */
+  /* border: none; */
+}
+
+.previousPageButton{
+  background: none;
+  border: none;
+}
+
+.nextPageButton{
+  background: none;
+  border: none;
+}
+
+.ArrowL{
+  margin-right: 1rem;
+  /* cursor: not-allowed; */
+}
+
+.ArrowR{
+  margin-left: 1rem;
+  /* cursor: not-allowed; */
+
+}

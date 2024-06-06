@@ -19,6 +19,8 @@ import "./Cart.css";
 const Cart = () => {
   const { cartData, isLoading, cartSubTotal } = useCart();
 
+  console.log(cartData);
+
   const formattedPrice = (amount) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",

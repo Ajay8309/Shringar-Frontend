@@ -17,6 +17,10 @@ class OrderService {
     getOrder(id) {
         return API.get(`/order/${id}`);
     }
+
+    getAll(page) {
+        return API.get(`/order/getAll/?page=${page}`);
+    }
 }
 
 export default new OrderService();

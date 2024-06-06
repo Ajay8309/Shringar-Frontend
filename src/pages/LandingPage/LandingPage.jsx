@@ -15,23 +15,20 @@ import braceletsImage from "../../assets/categoryImages/bracelets.webp"
 import mangalsutraImage from "../../assets/categoryImages/Mangalsutra.webp"
 import chainImage from '../../assets/categoryImages/Chains.webp';
 import { PrevArrow, NextArrow } from "../../components/Arrows";
-
-
-// import braceletsImage from '../../assets/categoryImages/bracelets.webp';
-// import coinsImage from '../../assets/categoryImages/Coins.jpg';
 import ringsImage from '../../assets/categoryImages/Rings.webp';
-
-
+import { useWishlist } from '../../context/WishlistContext';
 
 const LandingPage = () => {
   const { products } = useProduct();
+  const {addItem} = useWishlist();
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  console.log(products);
+  // console.log(products);
 
   const getCategoryImageSrc = (categoryName) => {
-    if (!categoryName) return null; // Add null check here
-  
+    if (!categoryName) return null;
+
     switch (categoryName.toLowerCase()) {
       case 'necklaces':
         return necklacesImage;
@@ -56,11 +53,14 @@ const LandingPage = () => {
         return Array.from(new Set(products.map(product => product.category_name)));
       });
       setCategories(getCategories());
+      setLoading(false);  
+    } else {
+      setLoading(true);  
     }
   }, [products]);
-  
-  console.log(products);
-  console.log(categories);
+
+  // console.log(products);
+  // console.log(categories);
 
   const settings = {
     dots: false,
@@ -130,15 +130,19 @@ const LandingPage = () => {
         <h3>Checkout the Most Gifted Products</h3>
       </div>
 
-      <div>
-        <Slider {...settings2} className='slide'>
-          {products && products.slice(0, 5).map((product) => (
-            <div key={product.product_id} className='giftCard'>
-              <SimilarItems product={product} />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      {loading ? (
+        <div>Loading...</div>  
+      ) : (
+        <div>
+          <Slider {...settings2} className='slide'>
+            {products && products.slice(0, 5).map((product) => (
+              <div key={product.product_id} className='giftCard'>
+                <SimilarItems product={product} addToWishlist={addItem} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
 
       <div className="giftedSection1">
         <h1>Shop By Category</h1>
@@ -154,22 +158,24 @@ const LandingPage = () => {
         ))}
       </div>
 
-
-
       <div className="giftedSection">
         <h1>Top Sellers</h1>
         <h3>Checkout the Most Selling Products</h3>
       </div>
 
-      <div>
-        <Slider {...settings2} className='slide'>
-          {products && products.slice(0, 5).map((product) => (
-            <div key={product.product_id} className='giftCard'>
-              <SimilarItems product={product} />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      {loading ? (
+        <div>Loading...</div> 
+      ) : (
+        <div>
+          <Slider {...settings2} className='slide'>
+            {products && products.slice(0, 5).map((product) => (
+              <div key={product.product_id} className='giftCard'>
+                <SimilarItems product={product} addToWishlist={addItem} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </Layout>
   );
 };

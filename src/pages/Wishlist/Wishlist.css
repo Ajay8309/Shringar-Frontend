@@ -40,3 +40,72 @@
     color: #0d0909; 
   }
 
+  .product-card-wishlist {
+    border: 1px solid #ddd;
+    padding: -4px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: calc(25% - 16px);
+    box-sizing: border-box;
+    max-width: 25vw;
+}
+
+
+
+
+
+@media screen and (max-width: 886px) {
+  .product-list {
+    padding: 170px 18px 38px 47px;;
+  }
+}
+
+@media (max-width: 800px) {
+  .product-card-wishlist {
+      width: calc(50% - 16px);
+      max-width: 100%;
+  }
+
+  .priceName {
+    display: flex;
+    width: 28vw;
+    /* display: flex; */
+    /* border: 2px solid red; */
+    justify-content: space-between;
+}
+
+  .removeWishlistItemDelete {
+    height: 5vh;
+    width: 28vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+}
+
+@media (max-width: 600px) {
+  .product-card-wishlist {
+      width: 100%;
+      max-width: 100%;
+  }
+
+
+  .priceName {
+    display: flex;
+    width: 49vw;
+    /* display: flex; */
+    /* border: 2px solid red; */
+    justify-content: space-between;
+}
+
+  .removeWishlistItemDelete {
+    height: 5vh;
+    width: 49vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+
+}

@@ -404,4 +404,18 @@
   .hr {
     width: 80vw;
   }
+
+  .stars {
+    display: flex;
+  }
+
+  .AddreviewContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 15px;
+    margin-left: 43px;
+    /* border: 2px solid red; */
+}
 }

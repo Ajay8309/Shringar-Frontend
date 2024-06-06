@@ -36,7 +36,7 @@ const Wishlist = () => {
 
       <div className="product-list">
         {wishlistData?.items?.map((prod) => (
-          <div key={prod.product_id} className="product-card">
+          <div key={prod.product_id} className="product-card-wishlist">
             <div className="group">
               <div className="underline">
               {/* <Link to={`products/${wishlistData?.product_id}`} className="underline"> */}

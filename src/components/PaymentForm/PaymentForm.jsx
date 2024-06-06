@@ -67,7 +67,7 @@ const PaymentForm = ({ previousStep, addressData, nextStep }) => {
             await OrderService.createOrder(cartSubTotal, cartTotal, data.id, "RAZORPAY");
             setCartData({ ...cartData, items: [] });
             setIsProcessing(false);
-            navigate("/cart/success", {
+            navigate("/cart", {
               state: {
                 fromPaymentPage: true,
               },

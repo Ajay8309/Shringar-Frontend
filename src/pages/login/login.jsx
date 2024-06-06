@@ -16,6 +16,9 @@ import Bg from "../../assets/leftBg.jpg"
 import PasswordIcon from "../../assets/passwordIcon.png"
 import MailIcon from "../../assets/mailIcon.png"
 import Logoo from "../../assets/logoo.png"
+import leftImage from "../../assets/leftImage.png"
+import { FaAngleRight, FaAngleLeft } from 'react-icons/fa'; 
+
 
 const Login = () => {
   const { isLoggedIn, setUserState } = useUser();
@@ -24,6 +27,7 @@ const Login = () => {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [emailClicked, setEmailClicked] = useState(false);
   const [passwordClicked, setPasswordClicked] = useState(false);
+  const [showLeftContainer, setShowLeftContainer] = useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const { state } = useLocation();
 
@@ -100,20 +104,32 @@ const Login = () => {
   };
 
 
+  const handleLeftSlider = () => {
+    setShowLeftContainer(true);
+    console.log("Hello");
+  };
 
+  const handleRightSlider = () => {
+    setShowLeftContainer(false);
+    console.log("Hello");
+
+  };
 
   return (
     <div className="MainContainer">
       <div className="containerNav">
 
-     <div className="leftContainer">
-       
+     <div className={`leftContainer ${showLeftContainer ? '' : 'active'}`}>
+       <img src={leftImage} className='leftImage' alt="" />
+
+       <div className="rightSlider" onClick={handleRightSlider}>
+        <FaAngleRight/>
+       </div>
+
      </div>
 
+        <div className={`rightContainer ${showLeftContainer ? 'active' : ''}`}>
 
-        <div className="rightContainer">
-
-       
           
         <form onSubmit={handleSubmit(onSubmit)} className="loginContainer">
         <div className="upperSection">
@@ -125,6 +141,9 @@ const Login = () => {
           Adorn your moments with brilliance
           </p>
         </div>
+       <div className="leftSlider" onClick={handleLeftSlider}>
+        <FaAngleLeft/>
+       </div>
 
         <div className="in">
          <div className={`placeholder ${emailClicked ? 'clicked' : ''}`}>Email</div>

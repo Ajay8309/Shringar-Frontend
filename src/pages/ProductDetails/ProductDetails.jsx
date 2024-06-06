@@ -241,15 +241,16 @@ const ProductDetails = () => {
           <span className='hr2'></span>
 
           <div className="AddreviewContainer">
-            <h1>{+product?.avg_rating}.0</h1>
+            <div>{+product?.avg_rating}.0</div>
             <ReactStars
+              classNames="stars"
               count={5}
               size={28}
               edit={false}
               value={+product?.avg_rating}
               activeColor="#ffd700"
             />
-            <h1>{product.review_count} Reviews</h1>
+            <div>{product.review_count} Reviews</div>
           </div>
           <button
             className="add-review-button"

@@ -4,7 +4,7 @@
 .slick-next {
   font-size: 34px; /* Adjust the size as needed */
   color: #fde8e8; /* Change the color as needed */
-  z-index: 1; /* Ensure arrows are above the slides */
+  z-index: 0; /* Ensure arrows are above the slides */
   background-color: rgb(59, 58, 58);
   border-radius: 50%;
   padding: 15px;
@@ -17,11 +17,11 @@
 }
 
 .slick-prev {
-  left: 10px; /* Adjust the position as needed */
+  left: 10px; 
 }
 
 .slick-next {
-  right: 10px; /* Adjust the position as needed */
+  right: 10px;
 }
 
 .slick-dots li button:before {
@@ -86,12 +86,12 @@
   display: flex;
   justify-content: space-around;
 }
-
 .CategoryContainer {
   display: flex;
-  margin-top: 70px;
-  /* border: 2px solid red; */
+  flex-wrap: wrap;
   justify-content: space-around;
+  margin-top: 70px;
+  padding: 40px;
 }
 
 .categoryCard {
@@ -101,6 +101,8 @@
   margin: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  flex: 1 1 calc(33.333% - 16px); /* Adjust based on the screen size */
+  box-sizing: border-box;
 }
 
 .categoryCard:hover {
@@ -118,4 +120,17 @@
 .categoryName {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1200px) {
+  .categoryCard {
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .categoryCard {
+    flex: 1 1 calc(100% - 16px);
+  }
 }

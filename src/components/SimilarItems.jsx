@@ -18,9 +18,11 @@ const SimilarItems = ({ product, addToWishlist }) => {
 
     const [isFavorite, setIsFavorite] = useState(false);
 
+    // console.log(product);
+
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
-        addToWishlist();
+        addToWishlist(product);
       };
   return (
     <div className="group">

@@ -43,14 +43,29 @@ const CartProvider = ({ children }) => {
 
     useEffect(() => {
         const updateCartTotals = () => {
-            const subtotal = cartData.items.reduce((acc, cur) => acc + (cur.subtotal || 0), 0);
-            const totalQuantity = cartData.items.reduce((acc, cur) => acc + (cur.quantity || 0), 0);
+            // Ensure that the subtotals are being parsed as numbers
+            const subtotal = cartData.items.reduce((acc, cur) => {
+                const itemSubtotal = parseFloat(cur.subtotal) || 0;  // Parse the subtotal
+                console.log(`Item Subtotal: ${itemSubtotal}, Accumulated: ${acc}`);  // Debugging log
+                return acc + itemSubtotal;
+            }, 0);
+
+            const totalQuantity = cartData.items.reduce((acc, cur) => {
+                const itemQuantity = parseInt(cur.quantity) || 0;  // Parse the quantity
+                console.log(`Item Quantity: ${itemQuantity}, Accumulated: ${acc}`);  // Debugging log
+                return acc + itemQuantity;
+            }, 0);
+
             setCartSubTotal(subtotal);
             setCartTotal(totalQuantity);
+            console.log('Cart Data:', cartData);
+            console.log('Subtotal:', subtotal);
+            console.log('Total Quantity:', totalQuantity);
         };
         updateCartTotals();
         toast.success("Cart Updated");
     }, [cartData]);
+
 
     const addItem = async (product, quantity) => {
         if (isLoggedIn) {

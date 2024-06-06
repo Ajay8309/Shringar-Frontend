@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import orderService from "../../services/order.service";
 import styles from "./Orders.module.css"; // Import your CSS module
+import Arrowleft from '../../assets/arrowLeft.jpeg';
+import Arrowright from '../../assets/arrowRight.jpeg';
 
 const Orders = () => {
   const { orders, setOrders } = useOrders();
@@ -30,8 +32,10 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    orderService.getAllOrders(currentPage).then((res) => setOrders(res.data));
+    orderService.getAll(currentPage).then((res) => setOrders(res.data));
   }, [currentPage, setOrders]);
+  
+  // console.log(orders);
 
   if (orders?.length === 0) {
     return (
@@ -60,25 +64,33 @@ const Orders = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {orders?.items.map((order) => (
-                <TableRow
-                  className={`${styles.row} cursor-pointer`}
-                  onClick={() => goToDetails(order)}
-                  key={order.order_id}
-                >
-                  <OrderItem order={order} />
-                </TableRow>
-              ))}
-            </TableBody>
+  {orders?.map((order) => (
+    <TableRow
+      className={`${styles.row} cursor-pointer`}
+      onClick={() => goToDetails(order)}
+      key={order.order_id}
+    >
+      <OrderItem order={order} />
+    </TableRow>
+  ))}
+</TableBody>
+
           </Table>
         </TableContainer>
         <TableFooter>
-          <Pagination
-            totalResults={orders?.total}
-            resultsPerPage={5}
-            onChange={handlePage}
-            label="Table navigation"
-          />
+        <div className={styles.paginationContainer}>
+        <div className={styles.pagination}>
+          <button className={styles.previousPageButton}>
+            <img src={Arrowleft} alt="" className={styles.ArrowL} />
+          </button>
+          <div className={styles.pageInfo}>
+            <p className={styles.currentPage}>page</p>
+          </div>
+          <button className={styles.nextPageButton}>
+            <img src={Arrowright} className={styles.ArrowR} alt="" />
+          </button>
+        </div>
+          </div>
         </TableFooter>
       </div>
     </Layout>
