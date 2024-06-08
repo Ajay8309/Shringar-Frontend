@@ -14,7 +14,7 @@ import Layout from "../../layout/layout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import orderService from "../../services/order.service";
-import styles from "./Orders.module.css"; // Import your CSS module
+import styles from "./Orders.module.css"; 
 import Arrowleft from '../../assets/arrowLeft.jpeg';
 import Arrowright from '../../assets/arrowRight.jpeg';
 
