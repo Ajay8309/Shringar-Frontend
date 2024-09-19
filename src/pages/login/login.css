@@ -13,6 +13,11 @@ body {
     display: flex;
 }
 
+.inn {
+    /* border: 2px solid red; */
+    margin-top: 22px;
+}
+
 .rightContainer {
     /* border: 2px solid red; */
     height: 100vh;
@@ -67,7 +72,7 @@ body {
     position: relative;
     width: 100px;
     background-color: white;
-    top: 21px;
+    top: -17px;
     left: 8px;
     
 }

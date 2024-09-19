@@ -24,7 +24,7 @@ const LandingPage = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // console.log(products);
+  // console.log(categories);
 
   const getCategoryImageSrc = (categoryName) => {
     if (!categoryName) return null;
@@ -59,7 +59,7 @@ const LandingPage = () => {
     }
   }, [products]);
 
-  // console.log(products);
+  console.log(products);
   // console.log(categories);
 
   const settings = {

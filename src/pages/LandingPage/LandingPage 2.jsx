@@ -27,7 +27,7 @@ const LandingPage = () => {
   const { products } = useProduct();
   const [categories, setCategories] = useState([]);
 
-  console.log(products);
+  console.log("Hello");
 
   const getCategoryImageSrc = (categoryName) => {
     if (!categoryName) return null; // Add null check here

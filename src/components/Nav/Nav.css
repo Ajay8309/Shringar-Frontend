@@ -270,6 +270,7 @@ ul {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-top: 8px;
 }
 
 .underline {

@@ -6,17 +6,15 @@ import ProductService from '../../services/product.service';
 import ReviewService from '../../services/review.service';
 import Layout from '../../layout/layout';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
-import './ProductDetails.css';
+import s from "../ProductDetails/ProductDetails.module.css"
 import { useReview } from '../../context/ReviewContext';
 import { TrendingUp, RefreshCw, Truck } from 'react-feather';
 import ReactStars from 'react-rating-stars-component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useProduct } from "../../context/ProductContext";
-// import Product from "../../components/Product/Product";
 import SimilarItems from '../../components/SimilarItems';
 import VirtualTryOn from '../../components/VirtualTryOn';
-// import Model from "../../assets/model.gltf"
 import Slider from 'react-slick'; 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -134,28 +132,22 @@ const ProductDetails = () => {
       },
     ],
   };
-  
-  
   useEffect(() => {
     const handleScroll = () => {
-      const productDetailsContainer = document.querySelector('.product-details-container');
-      if (productDetailsContainer) {
-        const isVisible = isElementInViewport(productDetailsContainer);
-        setShowFixedProductDetails(!isVisible);
-      }
+      const productDetailsContainer = document.querySelector(`.${s.productDetailsContainer}`);
+      const isVisible = productDetailsContainer ? isElementInViewport(productDetailsContainer) : false;
+      setShowFixedProductDetails(!isVisible);
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
 
   const isElementInViewport = (el) => {
     const rect = el.getBoundingClientRect();
-    // console.log(window.innerWidth);
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -163,24 +155,34 @@ const ProductDetails = () => {
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   };
-  
-  
-  
+
+  const handleScroll = () => {
+    const isTop = window.scrollY === 0;
+    setShowFixedProductDetails(!isTop);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   return (
     <Layout loading={isLoading}>
       {product && (
-        <div className="product-details-container">
-          <div className="productInfoContainer">
-            <div className="product-details-image">
+        <div className={s.productDetailsContainer}>
+          <div className={s.productInfoContainer}>
+            <div className={s.productDetailsImage}>
               <img src={product.image_url} alt={product.name} />
             </div>
 
-            <div className="product-details-info">
-              <div className="titleName">
-                <div className="nameStarComponent">
+            <div className={s.productDetailsInfo}>
+              <div className={s.titleName}>
+                <div className={s.nameStarComponent}>
                   <h2>{product.name}</h2>
-                  <div className="wishlistStarContainer">
+                  <div className={s.wishlistStarContainer}>
                     <ReactStars
                       count={5}
                       size={21}
@@ -193,21 +195,21 @@ const ProductDetails = () => {
                 </div>
 
                 <button onClick={() => handleAddToWishlist(product)}>
-                  <FaHeart className="wishlistIcon" />
+                  <FaHeart className={s.wishlistIcon} />
                 </button>
               </div>
-              <span className="underlineName"></span>
+              <span className={s.underlineName}></span>
               <p>{product.description}</p>
-              <p className="product-price">
-                Price: <span className="priceSpan"> {formattedPrice(product.price)}</span> <br />
-                <span className="taxContent">Price is inclusive of all taxes</span>
+              <p className={s.productPrice}>
+                Price: <span className={s.priceSpan}> {formattedPrice(product.price)}</span> <br />
+                <span className={s.taxContent}>Price is inclusive of all taxes</span>
               </p>
-              <p className="weight">
-                Gross weight <span className="weightSpan">{product.weight}gms</span>
+              <p className={s.weight}>
+                Gross weight <span className={s.weightSpan}>{product.weight}gms</span>
               </p>
-              <p className="purity">Gold purity : 22 karat</p>
+              <p className={s.purity}>Gold purity : 22 karat</p>
 
-              <div className="product-buttons">
+              <div className={s.productButtons}>
                 <button onClick={handleAddToCart}>Add to Cart</button>
                 <button onClick={() => setIsVirtualTryOnVisible(!isVirtualTryOnVisible)}>
                   Virtual Try-On
@@ -222,28 +224,28 @@ const ProductDetails = () => {
             />
           )}
 
-              <span className="hr"></span>
+              <span className={s.hr}></span>
 
-              <p className="txt1">
-                <TrendingUp size={19} /> <span className="txtSpan">Purity Guaranteed</span>
+              <p className={s.txt1}>
+                <TrendingUp size={19} /> <span className={s.txtSpan}>Purity Guaranteed</span>
               </p>
-              <p className="txt1">
-                <RefreshCw size={19} /> <span className="txtSpan">Exchange across all stores</span>
+              <p className={s.txt1}>
+                <RefreshCw size={19} /> <span className={s.txtSpan}>Exchange across all stores</span>
               </p>
-              <p className="txt1">
+              <p className={s.txt1}>
                 {' '}
-                <Truck size={19} /> <span className="txtSpan">Free Shipping all across India</span>
+                <Truck size={19} /> <span className={s.txtSpan}>Free Shipping all across India</span>
               </p>
-              <span className="hr"></span>
+              <span className={s.hr}></span>
             </div>
           </div>
 
-          <span className='hr2'></span>
+          <span className={s.hr2}></span>
 
-          <div className="AddreviewContainer">
+          <div className={s.AddreviewContainer}>
             <div>{+product?.avg_rating}.0</div>
             <ReactStars
-              classNames="stars"
+              classNames={s.stars}
               count={5}
               size={28}
               edit={false}
@@ -253,21 +255,21 @@ const ProductDetails = () => {
             <div>{product.review_count} Reviews</div>
           </div>
           <button
-            className="add-review-button"
+            className={s.addReviewButton}
             onClick={() => setIsReviewFormVisible(!isReviewFormVisible)}
           >
             Add Review
           </button>
 
-          <span className='hr2'></span>
+          <span className={s.hr2}></span>
 
-          {isReviewFormVisible && (
-            <div className={`review-form ${isReviewFormVisible ? 'show' : ''}`}>
+          {/* {isReviewFormVisible && ( */}
+             <div className={`${s.reviewForm} ${isReviewFormVisible ? s.show : ''}`}>
               <h4>Add Your Review</h4>
 
-              <div className="ratingBox">
+              <div className={s.ratingBox}>
                 <div>Rating:</div>
-              <label className='ratingStars'>
+              <label className={s.ratingStars}>
                 <ReactStars
                   count={5}
                   size={24}
@@ -278,11 +280,11 @@ const ProductDetails = () => {
               </label>
               </div>
 
-              <div className="reviewBox">
+              <div className={s.reviewBox}>
                 <div>Content:</div>
-              <label className='reviewContent'>
+              <label className={s.reviewContent}>
                 <textarea
-                  className='reviewContent2'
+                  className={s.reviewContent2}
                   value={newReviewContent}
                   onChange={(e) => setNewReviewContent(e.target.value)}
                 />
@@ -290,23 +292,23 @@ const ProductDetails = () => {
               </div>
               <button onClick={handleAddReview}>Submit Review</button>
             </div>
-          )}
+          {/* )} */}
         </div>
       )}
 
-      <div className="product-reviews">
         <h3>Reviews</h3>
+      <div className={s.productReviews}>
         {reviews.reviews ? (
           reviews.reviews.map((review) => (
-            <div key={review.id} className="review-item">
-            <div className="leftReviewContainer">
-              <div className="user-info">
-                <div className="user-icon-container">
-                  <FontAwesomeIcon icon={faUser} className="user-icon" />
+            <div key={review.id} className={s.reviewItem}>
+            <div className={s.leftReviewContainer}>
+              <div className={s.userInfo}>
+                <div className={s.userIconContainer}>
+                  <FontAwesomeIcon icon={faUser} className={s.userIcon} />
                 </div>
-                <span className="username">{review.name}</span>
+                <span className={s.username}>{review.name}</span>
               </div>
-              <div className="rating">
+              <div className={s.rating}>
                 <ReactStars
                   count={5}
                   size={21}
@@ -315,9 +317,9 @@ const ProductDetails = () => {
                   activeColor="#ffd700"
                 />
               </div>
-              <p className="review-content">{review.content}</p>
+              <p className={s.reviewContent}>{review.content}</p>
               </div>
-              <span className="review-time">{review.date}</span>
+              <span className={s.reviewTime}>{review.date}</span>
             </div>
           ))
         ) : (
@@ -326,7 +328,7 @@ const ProductDetails = () => {
       </div>
 
       
-      <div className="similarProductsByCategory">
+      <div className={s.similarProductsByCategory}>
   <h1>You May Also Like</h1>
   {product && (
     <Slider {...settings}> 
@@ -346,8 +348,7 @@ const ProductDetails = () => {
   )}
 </div>
 
-
-      {/* {showFixedProductDetails && <FixedProductDetails product={product} />} */}
+      {showFixedProductDetails && <FixedProductDetails product={product}/>}
 
     </Layout>
   );

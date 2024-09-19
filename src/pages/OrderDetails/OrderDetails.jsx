@@ -9,11 +9,31 @@ import styles from "./OrderDetails.module.css";
 const OrderDetails = () => {
   const { id } = useParams();
   const { state } = useLocation();
-  // const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState(state?.order || null);
+  const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   orderService.getOrder(id).then((res) => setOrder(res.data));
-  // }, [id]);
+  useEffect(() => {
+    if (!order) {
+      let isMounted = true;
+      orderService.getOrder(id)
+        .then((res) => {
+          if (isMounted) {
+            setOrder(res.data);
+          }
+        })
+        .catch((err) => {
+          if (isMounted) {
+            setError(err.message);
+          }
+        });
+
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [id, order]);
+
+  console.log(order);
 
   const formattedPrice = (amount) => {
     return new Intl.NumberFormat("en-IN", {
@@ -22,42 +42,58 @@ const OrderDetails = () => {
     }).format(amount);
   };
 
-  console.log(state?.order?.products); 
+  if (error) {
+    return (
+      <Layout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Order Details</h1>
+          <p className={styles.error}>Error: {error}</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (!order) {
+    return (
+      <Layout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Order Details</h1>
+          <p>Loading...</p>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <div className={styles.container}>
         <h1 className={styles.title}>Order Details</h1>
-        {state?.order && (
-          <>
-            <p className={styles.subtitle}>Order no: #{state.order.order_id}</p>
-            <p>{`${state.order.products?.length || "Not available"} items`}</p> 
-            <p>
-              Status: <Badge type="success" className={styles.badge}>{state.order.status}</Badge>
-            </p>
-            <p className={styles.amount}>Total Amount: {formattedPrice(state.order.amount)}</p>
-            <p>Placed on: {format(parseISO(state.order.date), "d MMM, yyyy")}</p>
-            <div className={styles.cardWrapper}>
-              {state.order.products?.map((product) => ( 
-                <Card key={product.product_id} className={styles.card}>
-                  <img
-                    className={styles.cardImage}
-                    loading="lazy"
-                    decoding="async"
-                    src={product.product_image_url}
-                    alt={product.product_name}
-                  />
-                  <CardBody className={styles.cardBody}>
-                    <h1 className={styles.itemName}>{product.product_name}</h1>
-                    <p className={styles.itemPrice}>{formattedPrice(product.product_price)}</p>
-                    <p className={styles.itemDescription}>{product.product_description}</p>
-                    <p className={styles.itemQuantity}>Quantity: {product.quantity}</p>
-                  </CardBody>
-                </Card>
-              ))}
-            </div>
-          </>
-        )}
+        <p className={styles.subtitle}>Order no: #{order.order_id}</p>
+        <p>{`${order.products?.length || "Not available"} items`}</p>
+        <p>
+          Status: <Badge type="success" className={styles.badge}>{order.status}</Badge>
+        </p>
+        <p className={styles.amount}>Total Amount: {formattedPrice(order.amount)}</p>
+        <p>Placed on: {format(parseISO(order.date), "d MMM, yyyy")}</p>
+        <div className={styles.cardWrapper}>
+          {order.products?.map((product) => (
+            <Card key={product.product_id} className={styles.card}>
+              <img
+                className={styles.cardImage}
+                loading="lazy"
+                decoding="async"
+                src={product.product_image_url}
+                alt={product.product_name}
+              />
+              <CardBody className={styles.cardBody}>
+                <h1 className={styles.itemName}>{product.product_name}</h1>
+                <p className={styles.itemPrice}>{formattedPrice(product.product_price)}</p>
+                <p className={styles.itemDescription}>{product.product_description}</p>
+                <p className={styles.itemQuantity}>Quantity: {product.quantity}</p>
+              </CardBody>
+            </Card>
+          ))}
+        </div>
       </div>
     </Layout>
   );

@@ -1,5 +1,4 @@
 import API from "../api/axios.config";
-import ProductList from "../pages/ProductList/ProductList";
 
 class ProductService {
     getProducts(page) {

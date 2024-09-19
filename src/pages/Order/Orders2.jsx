@@ -29,6 +29,9 @@ const Orders = () => {
     navigate(`/order/${order.order_id}`, { state: { order } });
   };
 
+  console.log()
+
+
   useEffect(() => {
     orderService.getAllOrders(currentPage).then((res) => setOrders(res.data));
   }, [currentPage, setOrders]);

@@ -27,6 +27,7 @@ const Orders = () => {
     setCurrentPage(num);
   };
 
+  console.log("Inside Order");
   const goToDetails = (order) => {
     navigate(`/order/${order.order_id}`, { state: { order } });
   };
@@ -35,7 +36,7 @@ const Orders = () => {
     orderService.getAll(currentPage).then((res) => setOrders(res.data));
   }, [currentPage, setOrders]);
   
-  // console.log(orders);
+  console.log(orders);
 
   if (orders?.length === 0) {
     return (

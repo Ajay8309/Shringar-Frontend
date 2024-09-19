@@ -1,4 +1,4 @@
-.product-details-container {
+.productDetailsContainer {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -20,7 +20,7 @@
 }
 
   
-  .product-details-image img {
+  .productDetailsImage img {
     max-width: 350px;
     border-radius: 8px;
     border: 2px solid;
@@ -30,7 +30,7 @@
     border: 2px solid;
   }
   
-  .product-details-info {
+  .productDetailsInfo {
     flex: 1;
     padding: 12px;
     display: flex;
@@ -45,22 +45,22 @@
     align-items: start;
   }
   
-  .product-details-info h2 {
+  .productDetailsInfo h2 {
     font-size: 24px;
     margin-bottom: 10px;
   }
 
-  .product-details-image {
+  .productDetailsImage {
     font-size: 10px;
   }
   
-  .product-price {
+  .productPrice {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 36px;
   }
 
-  .user-icon-container {
+  .userIconContainer {
     width: 30px; 
     height: 30px;
     border-radius: 50%;
@@ -76,7 +76,7 @@
     /* border: 2px solid red; */
   }
   
-  .user-icon {
+  .userIcon {
     width: 100%;
     height: 100%;
   }
@@ -87,7 +87,7 @@
   }   */
   
   
-  .product-buttons button {
+  .productButtons button {
     
     padding: 13px 47px;
     text-align: center;
@@ -100,7 +100,7 @@
     background-color: white;
   }
   
-  .product-buttons button:hover {
+  .productButtons button:hover {
     background-color: #ffa4a4;
   }
   
@@ -199,11 +199,13 @@
   margin-left: 5px;
  }
 
- .product-reviews {
+ .productReviews {
   margin-top: 20px;
+  overflow-y: auto;
+  height: 40vh;
 }
 
-.review-item {
+.reviewItem {
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -213,32 +215,32 @@
   transition: box-shadow 0.3s ease;
 }
 
-.review-item:hover {
+.reviewItem:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.review-item p {
+.reviewItem p {
   margin: 0;
 }
 
-.review-form {
+.reviewForm {
   margin-top: 30px;
 }
 
-.review-form h4 {
+.reviewForm h4 {
   font-size: 24px;
   margin-bottom: 15px;
   color: #333;
 }
 
-.review-form label {
+.reviewForm label {
   display: block;
   margin-bottom: 10px;
   color: #555;
 }
 
-.review-form input,
-.review-form textarea {
+.reviewForm input,
+.reviewForm textarea {
   width: 100%;
   padding: 15px;
   margin-bottom: 15px;
@@ -249,16 +251,16 @@
   transition: border-color 0.3s ease;
 }
 
-.review-form textarea {
+.reviewForm textarea {
   resize: vertical;
 }
 
-.review-form input:focus,
-.review-form textarea:focus {
+.reviewForm input:focus,
+.reviewForm textarea:focus {
   border-color: #3498db;
 }
 
-.review-form button {
+.reviewForm button {
   background-color: #fde8e8;
   color: #030303;
   padding: 18px 18px;
@@ -274,11 +276,11 @@
 .leftReviewContainer {
   width: 81vw;
 }
-.review-form button:hover {
+.reviewForm button:hover {
   background-color: #2980b9;
 }
 
-.add-review-button {
+.addReviewButton {
   display: flex;
   padding: 13px 54px;
     font-size: 20px;
@@ -312,7 +314,7 @@
 .reviewContent {
   margin-left: 25px;
     width: 81vw;
-    border: 2px solid rgb(0, 0, 0);
+    /* border: 2px solid rgb(0, 0, 0); */
 }
 
 .reviewContent2 {
@@ -321,7 +323,7 @@
 
 
 
-.review-form {
+.reviewForm {
   margin-top: 30px;
   max-height: 0;
   overflow: hidden;
@@ -329,10 +331,10 @@
 }
 
 .show {
-  max-height: 500px; 
+  max-height: 500px;
 }
 
-.product-list-similar {
+.productListSimilar {
   display: flex;
   width: 100vw;
 }
@@ -341,7 +343,7 @@
   margin-bottom: 15px;
 }
 
-.fixed-product-details {
+.fixedProductDetails {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -353,23 +355,23 @@
   align-items: center;
 }
 
-.fixed-product-details .img {
+.fixedProductDetails .img {
   margin-right: 20px;
 }
 
-.fixed-product-details .img img {
+.fixedProductDetails .img img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 5px;
 }
 
-.fixed-product-details .details h2 {
+.fixedProductDetails .details h2 {
   font-size: 18px;
   margin-bottom: 10px;
 }
 
-.fixed-product-details .details p {
+.fixedProductDetails .details p {
   font-size: 14px;
   color: #666;
 }
@@ -389,7 +391,7 @@
     align-items: center;
   }
 
-  .product-details-info {
+  .productDetailsInfo {
     width: 91vw;
   }
 

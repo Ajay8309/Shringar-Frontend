@@ -1,67 +1,62 @@
-/* Signup.module.css */
-
-.MainContainer {
+.container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-.SignupForm {
-    width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
-.SignupTitle {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.FormField {
-    margin-bottom: 20px;
-}
-
-.FormLabel {
+    justify-content: center;
+    margin: 5rem auto;
+  }
+  
+  .form {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 32rem;
+    margin: 0 0.5rem;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  .inputGroup {
+    margin-top: 1rem;
+  }
+  
+  .label {
     display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.FormInput {
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.FormError {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.SubmitButton {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.LoginLink {
-    font-size: 14px;
-    margin-top: 20px;
-}
-
-.Link {
-    color: #007bff;
-    text-decoration: none;
-}
+    padding: 0.5rem 0.75rem;
+    color: #4a5568;
+  }
+  
+  .helperText {
+    padding-top: 0.5rem;
+  }
+  
+  .button {
+    margin-top: 1rem;
+  }
+  
+  .link {
+    font-weight: 600;
+  }
+  
+  .text {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+  

@@ -4,7 +4,7 @@ import Spinner from "./components/Spinner/Spinner";
 import {Toaster} from "react-hot-toast"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import {Login, Signup, ProductList, ProductDetails, Cart, 
-  Wishlist, Profile, Checkout, Order, OrderDetails, LandingPage} from './pages'
+  Wishlist, Profile, Checkout, Order2, OrderDetails, LandingPage, ResetPassword} from './pages'
 import Layout from './layout/layout';
 import ProtectedRoute from "./routes/protected.route"
 
@@ -35,9 +35,9 @@ const App = () => {
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/profile" element = {<Profile/>}/>
       <Route path="/checkout" element={<Checkout/>}/>
-      <Route path="/order" element={<Order/>}/>
+      <Route path="/order" element={<Order2/>}/>
       <Route path="/order/:id" element={<OrderDetails/>}/>
-
+      <Route path="/reset-password" element={<ResetPassword />} />
 
     </Routes>
     </BrowserRouter>

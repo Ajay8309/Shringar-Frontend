@@ -65,7 +65,7 @@ const Nav = () => {
   };
 
   const handleSearch = () => {
-    // updateFilters({});
+    updateFilters({});
     setPage(1);
     console.log(searchQuery);
     getProductsByName(searchQuery);
@@ -134,6 +134,8 @@ const Nav = () => {
               <span>Login</span>
             </Link>
           </li>
+
+          
           <li className='cartLink'>
             <Link to="/cart" className='underline'>
               <button className='cartBtn'>
@@ -152,7 +154,7 @@ const Nav = () => {
           <li className='wishlistLink'>
                <Link to="/wishlist" className='underline'>
                   <button className='wishlistBtn'>
-                    <span>Wishlist</span>
+                    {/* <span>Wishlist</span> */}
                     <Heart className='heartImg'/>
                     <div className="wishlistTotal">
                       {wishlistTotal}
@@ -163,7 +165,7 @@ const Nav = () => {
            <li className='cartLink'>
            <Link to="/cart" className='underline'>
               <button className='cartBtn'>
-                <span>Cart</span>
+                {/* <span>Cart</span> */}
                 <ShoppingCart className='cartImg'/>
                 <div className="cartTotal">
                   {cartTotal}

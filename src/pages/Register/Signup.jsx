@@ -1,206 +1,272 @@
-import React from 'react';
-import { Button, HelpText, Input, Label } from '@windmill/react-ui';
-import API from '../../api/axios.config';
-import { useUser } from '../../context/UserContext';
-import { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { Link, Navigate, useLocation } from 'react-router-dom';
-import PulseLoader from 'react-spinners/PulseLoader';
+import { useState, useRef } from "react";
+import { useForm } from "react-hook-form";
+import { Button, HelperText } from "@windmill/react-ui";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
+import toast from "react-hot-toast";
+import { useUser } from "../../context/UserContext";
+import API from "../../api/axios.config";
+import ForgotPasswordModal from "../../components/ForgotPasswordModal/ForgotPasswordModal";
+import "../login/login.css";  // Use same styles as Login
+import Logoo from "../../assets/logoo.png";
+import MailIcon from "../../assets/mailIcon.png";
+import PasswordIcon from "../../assets/passwordIcon.png";
+import leftImage from "../../assets/leftImage.png";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
-import styles from './Signup.module.css'; // Import CSS module for Signup component
+const Register = () => {
+  const { isLoggedIn, setUserState } = useUser();
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useLocation();
+  const [showLeftContainer, setShowLeftContainer] = useState(false);
+  const [emailClicked, setEmailClicked] = useState(false);
+  const [passwordClicked, setPasswordClicked] = useState(false);
+  const [confirmPasswordClicked, setConfirmPasswordClicked] = useState(false);
+  const [UsernameClicked, setUsernameClicked] = useState(false);
 
-const Signup = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
-    const { state } = useLocation();
-    const { isLoggedIn, setUserState } = useUser();
 
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-        watch,
-    } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      username: "",
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+    },
+  });
 
-    const password = useRef({});
-    password.current = watch('password', '');
+  const password = useRef({});
+  password.current = watch("password", "");
 
-    const onSubmit = (data) => {
-        const { password, password2, username, name, email } = data;
-        setError('');
-        if (password === password2) {
-            setIsLoading(!isLoading);
-            API.post('auth/signup', {
-                username,
-                email,
-                password,
-                fullname: name,
-                role: "customer",
-            })
-                .then((data) => {
-                    setError('');
-                    toast.success('Account created Successfully');
-                    setTimeout(() => {
-                        setUserState(data);
-                        setIsLoading(!isLoading);
-                    }, 1000);
-                })
-                .catch(({ response }) => {
-                    setIsLoading(false);
-                    setError(response.data.message);
-                });
-        } else {
-            setError('Password does not match:');
-        }
-    };
+  const onSubmit = async (data) => {
+    const { username, email, password, password2, name } = data;
 
-    if (isLoggedIn) {
-        return <Navigate to={state?.from || '/'} />;
+    if (password !== password2) {
+      setError("Passwords do not match");
+      return;
     }
 
-    return (
-        <div className={styles.MainContainer}>
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.SignupForm}>
-                <h1 className={styles.SignupTitle}>Create Account</h1>
-                <div className={styles.FormField}>
-                    <Label className={styles.FormLabel}>
-                        <span>Username</span>
-                    </Label>
-                    <input
-                        className={styles.FormInput}
-                        type="text"
-                        name="username"
-                        {...register('username', {
-                            minLength: {
-                                value: 4,
-                                message: 'Username must be greater than 3 characters:',
-                            },
-                            required: 'Username is required',
-                        })}
-                    />
-                </div>
-                {errors.username && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {errors.username.message}
-                    </HelpText>
-                )}
+    try {
+      setError("");
+      setIsLoading(true);
+      const response = await API.post("/auth/signup", {
+        username,
+        email,
+        password,
+        fullname: name,
+      });
+      toast.success("Account created successfully.");
+      setTimeout(() => {
+        setUserState(response.data);
+        setIsLoading(false);
+      }, 1500);
+    } catch (error) {
+      setIsLoading(false);
+      setError(error.response?.data.message);
+    }
+  };
 
-                <div className={styles.FormField}>
-                    <Label className={styles.FormLabel}>
-                        <span>Fullname</span>
-                    </Label>
-                    <input
-                        className={styles.FormInput}
-                        type="text"
-                        name="name"
-                        {...register('name', {
-                            required: 'Name is required',
-                            minLength: {
-                                value: 4,
-                                message: 'Name must be greater than 3 characters:',
-                            },
-                        })}
-                    />
-                </div>
+  if (isLoggedIn) {
+    return <Navigate to={state?.from || "/"} />;
+  }
 
-                {errors.name && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {errors.name.message}
-                    </HelpText>
-                )}
+  const handleLeftSlider = () => {
+    setShowLeftContainer(true);
+  };
 
-                <div className={styles.FormField}>
-                    <Label className={styles.FormLabel}>
-                        <span>Email</span>
-                    </Label>
-                    <input
-                        className={styles.FormInput}
-                        type="email"
-                        name="email"
-                        {...register('email', {
-                            required: 'Email is required',
-                            pattern: {
-                                value: 4,
-                                message: 'Invalid email format:',
-                            },
-                        })}
-                    />
-                </div>
+  const handleRightSlider = () => {
+    setShowLeftContainer(false);
+  };
 
-                {errors.email && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {errors.email.message}
-                    </HelpText>
-                )}
-
-                <div className={styles.FormField}>
-                    <Label className={styles.FormLabel}>
-                        <span>Password</span>
-                    </Label>
-                    <input
-                        className={styles.FormInput}
-                        type="password"
-                        name="password"
-                        {...register('password', {
-                            required: 'Password is required',
-                            minLength: {
-                                value: 7,
-                                message: 'Password must be greater than 6 characters:',
-                            },
-                        })}
-                    />
-                </div>
-
-                {errors.password && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {errors.password.message}
-                    </HelpText>
-                )}
-
-                <div className={styles.FormField}>
-                    <Label className={styles.FormLabel}>
-                        <span>Confirm Password</span>
-                    </Label>
-                    <input
-                        className={styles.FormInput}
-                        type="password"
-                        name="password2"
-                        {...register('password2', {
-                            required: 'Password confirmation is required',
-                            validate: (value) =>
-                                value === password.current || 'Passwords do not match',
-                        })}
-                    />
-                </div>
-
-                {errors.password2 && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {errors.password2.message}
-                    </HelpText>
-                )}
-
-                <Button type="submit" className={styles.SubmitButton}>
-                    {isLoading ? (
-                        <PulseLoader color="blue" size={10} loading={isLoading} />
-                    ) : (
-                        'Create Account'
-                    )}
-                </Button>
-                {error && (
-                    <HelpText className={styles.FormError} valid={false}>
-                        {error}
-                    </HelpText>
-                )}
-                <p className={styles.LoginLink}>
-                    Have an Account?{' '}
-                    <Link to="/login" className={styles.Link}>
-                        Login
-                    </Link>
-                </p>
-            </form>
+  return (
+    <div className="MainContainer">
+      <div className="containerNav">
+        <div className={`leftContainer ${showLeftContainer ? "" : "active"}`}>
+          <img src={leftImage} className="leftImage" alt="" />
+          <div className="rightSlider" onClick={handleRightSlider}>
+            <FaAngleRight />
+          </div>
         </div>
-    );
+
+        <div className={`rightContainer ${showLeftContainer ? "active" : ""}`}>
+          <form onSubmit={handleSubmit(onSubmit)} className="loginContainer">
+            <div className="upperSection">
+              <div className="logoo">
+                <img src={Logoo} alt="Logo" />
+              </div>
+              <h2>SHRINGAR</h2>
+              <p className="tagline">Adorn your moments with brilliance</p>
+            </div>
+            <div className="leftSlider" onClick={handleLeftSlider}>
+              <FaAngleLeft />
+            </div>
+
+            <div className="in">
+              <div className={`placeholder ${emailClicked ? "clicked" : ""}`}>
+                Email
+              </div>
+              <div className="mailIcon">
+                <img src={MailIcon} alt="Mail Icon" />
+              </div>
+              <input
+                className="intag"
+                onClick={() => setEmailClicked(true)}
+                type="email"
+                name="email"
+                onBlur={() => setEmailClicked(false)}
+                {...register("email", {
+                  required: "Email required",
+                  pattern: {
+                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: "Invalid email",
+                  },
+                })}
+                placeholder=""
+              />
+              {errors.email && (
+                <HelperText valid={false}>{errors.email.message}</HelperText>
+              )}
+            </div>
+
+            <div className="in">
+              <div
+                className={`placeholder ${passwordClicked ? "clicked" : ""}`}
+              >
+                Password
+              </div>
+              <div className="mailIcon">
+                <img src={PasswordIcon} alt="Password Icon" />
+              </div>
+              <input
+                className="intag"
+                onClick={() => setPasswordClicked(true)}
+                type="password"
+                name="password"
+                onBlur={() => setPasswordClicked(false)}
+                {...register("password", {
+                  required: "Password required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                placeholder=""
+              />
+              {errors.password && (
+                <HelperText valid={false}>{errors.password.message}</HelperText>
+              )}
+            </div>
+            
+
+            <div className="in">
+              <div
+                className={`placeholder ${
+                  confirmPasswordClicked ? "clicked" : ""
+                }`}
+              >
+                Confirm Password
+              </div>
+              <div className="mailIcon">
+                <img src={PasswordIcon} alt="Confirm Password Icon" />
+              </div>
+              <input
+                className="intag"
+                onClick={() => setConfirmPasswordClicked(true)}
+                type="password"
+                name="password2"
+                onBlur={() => setConfirmPasswordClicked(false)}
+                {...register("password2", {
+                  validate: (value) =>
+                    value === password.current || "Passwords do not match",
+                })}
+                placeholder=""
+              />
+              {errors.password2 && (
+                <HelperText valid={false}>{errors.password2.message}</HelperText>
+              )}
+            </div>
+
+            <div className="in">
+            <div
+                className={`placeholder ${
+                  UsernameClicked ? "clicked" : ""
+                }`}
+              >
+                Username
+              </div>
+              <input
+                className="intag"
+                onClick={() => setUsernameClicked(true)}
+                onBlur={() => setUsernameClicked(false)}
+                type="text"
+                name="username"
+                {...register("username", {
+                  required: "Username required",
+                  minLength: {
+                    value: 4,
+                    message: "Username must be at least 4 characters",
+                  },
+                })}
+                placeholder=""
+              />
+              {errors.username && (
+                <HelperText valid={false}>{errors.username.message}</HelperText>
+              )}
+            </div>
+
+            <div className="inn">
+              <div className="placeholder clicked">Fullname</div>
+              <input
+                className="intag"
+                type="text"
+                name="name"
+                {...register("name", {
+                  required: "Fullname required",
+                  minLength: {
+                    value: 6,
+                    message: "Fullname must be at least 6 characters",
+                  },
+                })}
+                placeholder=""
+              />
+              {errors.name && (
+                <HelperText valid={false}>{errors.name.message}</HelperText>
+              )}
+            </div>
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="btn1"
+            >
+              {isLoading ? (
+                <PulseLoader color={"#0a138b"} size={10} loading />
+              ) : (
+                "Create Account"
+              )}
+            </Button>
+
+            {error && (
+              <HelperText valid={false}>{error}</HelperText>
+            )}
+
+            <p className="signupEnd">
+              Have an account?{" "}
+              <Link to="/login" className="signLink">
+                Login
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default Signup;
+export default Register;
